@@ -1,0 +1,432 @@
+<odoo>
+  <template id="success">
+    <t t-call="web.html_container">
+      <title>Secretary | Informe</title>
+        <body>
+          <h2 class="text-center">¡Gracias por informar!</h2>
+          <div id="wrap">
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="alert alert-success"> 
+                      <h2>¡Tu informe ha sido entregado correctamente. Gracias! </h2>
+                      <h3>Resumen:</h3>
+                        
+                      <ul> 
+                      <li>Horas: <t t-esc="informes.horas"/></li>
+                      <li>Publicaciones: <t t-esc="informes.publicaciones"/></li>
+                      <li>Videos: <t t-esc="informes.videos"/></li>
+                      <li>Revisitas: <t t-esc="informes.revisitas"/></li>
+                      <li>Cursos bíblicos: <t t-esc="informes.cursos"/></li>
+                      <li>Notas: <t t-esc="informes.notas"/></li>
+                      </ul>
+                        
+                       
+                    </div>
+                    <div class="text-center alert alert-primary justify-content-center">
+                      <h3 class="text-center">¿Ha habido algún error? Ponte en contacto con el secretario de tu congregación</h3>
+                      <a class="btn btn-success text-center" href="https://wa.me/34642087066" role="button">WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </body>
+    </t>
+  </template>
+
+
+  <template id="demasiadopronto">
+    <t t-call="web.html_container">
+      <title>Secretary | Informe</title>
+        <body class="text-center">
+          <h2 class="alert alert-primary text-center">¡"Por favor, espere al día 1 para poder informar"!</h2>
+          <h3 class="text-center">En caso de necesitar ayuda, ponte en contacto con el secretario de tu congregación</h3>
+          <a class="btn btn-success text-center" href="https://wa.me/34642087066" role="button">WhatsApp</a>
+        </body>
+    </t>
+  </template>
+  
+<!-- EN DESUSO-->
+  <template id="index">
+    <t t-call="web.html_container">
+      <title>Secretary | Informe</title>
+        <head>
+          <style type="text/css">
+            .btn-outline-primary:active {
+              background-color: #107E8B !important;
+              color: #F5F5F5 !important;
+              border-color: #107E8B !important;
+            }
+            .btn-outline-primary:hover {
+              background-color: #9E2667 !important;
+              color: #F5F5F5 !important;
+              border-color: #9E2667 !important;
+            }
+            .btn-outline-primary {
+              color: #107E8B !important;
+              border-color: #107E8B !important;
+            }
+            .btn-link {
+              color: #107E8B !important;
+            }
+            .btn-outline-primary:focus {
+              box-shadow: none;
+            }
+          </style>
+        </head>
+        <body style="background-color: #f5f5f5">
+          <h2 class="text-center" style="margin-top: 20px"> Informe de Predicación | Congregación Onteniente</h2><p></p>
+          <h4 class="text-center" >Escoja su grupo</h4>
+          
+
+
+          <div class="accordion" id="accordionExample">
+            <t t-foreach="grupos" t-as="g">
+            <div class="card">
+              <div class="card-header text-center" id="headingOne" style="background-color: #107E8B">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block" type="button" data-toggle="collapse" t-attf-data-target="#collapseGrupo{{g.name}}" aria-expanded="true" aria-controls="collapseOne">
+                    <span style="color: #f7f7f7">GRUPO <t t-esc="g.name" /> |</span> <span style="color: #D8D8D8"><t t-esc="g.responsable.name" /></span>
+                  </button>
+                </h2>
+              </div>
+          
+              <div t-attf-id="collapseGrupo{{g.name}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="accordion" id="accordionExample2">
+                  <div class="card-body list-group text-center">
+                    <t t-foreach="publicadores" t-as="p">
+                      <t t-if="g.name == p.grupo.name">
+                        <div id="headingPub">
+                          <button class="btn btn-outline-primary mt-0" style="margin-bottom: 5px" type="button" data-toggle="collapse" t-attf-data-target="#collapseForm{{p.id}}" aria-expanded="true"><t t-esc="p.name" /></button>
+                        </div>
+                        <div class="collapse" t-attf-id="collapseForm{{p.id}}" aria-labelledby="headingPub" data-parent="#accordionExample2">
+                          <form action="/panel/submit/" method="post" enctype="multipart/form-data" class="o_mark_required" data-mark="*" data-model_name="" data-success-page="">
+  
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="form-group">
+                              <label for="Nombre">Publicador</label>
+                              <input type="text" class="form-control" id="InputNombre" name="publicador" aria-describedby="horaslHelp" t-attf-placeholder="{{p.name}}" t-attf-value="{{p.id}}" readonly="true"></input>
+                            </div>
+                            <div class="form-group">
+                              <label for="Tipo_informe">Tipo Informe</label>
+                              <input type="text" class="form-control" id="InputTipo" name="tipo_informe" aria-describedby="horaslHelp" t-attf-placeholder="{{p.tipo}}" t-attf-value="{{p.tipo}}" readonly="true"></input>
+                            </div>
+                            <div class="form-group">
+                              <label for="Horas">Horas</label>
+                              <input type="number" class="form-control" id="horas" name="horas" aria-describedby="horaslHelp" placeholder="Introduce horas" required="True"></input>
+                              <small id="horaslHelp" class="form-text text-muted">Recuerda informar valores enteros</small>
+                            </div>
+                            <div class="form-group">
+                              <label for="Publicaciones">Publicaciones</label>
+                              <input type="number" class="form-control" id="InputPublicaciones" name="publicaciones" placeholder="Introduce publicaciones" required="True"></input>
+                            </div>
+                            <div class="form-group">
+                              <label for="Videos">Videos</label>
+                              <input type="number" class="form-control" id="InputVideos" name="videos" placeholder="Introduce videos" required="True"></input>
+                            </div>
+                            <div class="form-group">
+                              <label for="Revisitas">Revisitas</label>
+                              <input type="number" class="form-control" id="InputRevisitas" name="revisitas" placeholder="Introduce revisitas" required="True"></input>
+                            </div>
+                            <div class="form-group">
+                              <label for="Curso">Cursos Bíblicos</label>
+                              <input type="number" class="form-control" id="InputCursos" name="cursos" placeholder="Introduce cursos" required="True"></input>
+                            </div>
+                            <div class="form-group">
+                              <label for="Notas">Notas</label>
+                              <input type="text" class="form-control" id="InputNotas" name="notas" placeholder="Nota adicional"></input>
+                            </div>
+  
+                            <div class="form-check" style="margin-bottom: 10px">
+                              <label class="form-check-label" for="exampleCheck1">¿Eres, o tienes permiso de <t t-esc="p.name"/> para informar?</label>
+                            </div>
+                            <button type="submit" class="btn btn-success" style="margin-bottom: 70px; margin-top: 15px">Sí, enviar</button>
+                          </form>
+                        </div>
+                      </t>
+                    </t>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            
+            </t>  
+          </div>
+          
+        </body>
+     </t>   
+  </template>
+
+
+
+<!--ESTE ES EL BUENO-->
+  <template id="enviarinforme">
+    <t t-call="web.html_container">
+      <title>Secretary | Informe</title>
+        <head>
+          <style type="text/css">
+            .btn-outline-primary:active {
+              background-color: #107E8B !important;
+              color: #F5F5F5 !important;
+              border-color: #107E8B !important;
+            }
+            .btn-outline-primary:hover {
+              background-color: #9E2667 !important;
+              color: #F5F5F5 !important;
+              border-color: #9E2667 !important;
+            }
+            .btn-outline-primary {
+              color: #107E8B !important;
+              border-color: #107E8B !important;
+            }
+            .btn-link {
+              color: #107E8B !important;
+            }
+            .btn-outline-primary:focus {
+              box-shadow: none;
+            }
+          </style>
+        </head>
+        <body style="background-color: #f5f5f5">
+          <h2 class="text-center" style="margin-top: 20px"> Informe de Predicación | Congregación Onteniente</h2><p></p>
+          <h4 class="text-center" >Escoja su grupo</h4>
+          
+
+
+          <div class="accordion" id="accordionExample">
+            <t t-foreach="grupos" t-as="g">
+            <div class="card">
+              <div class="card-header text-center" id="headingOne" style="background-color: #107E8B">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block" type="button" data-toggle="collapse" t-attf-data-target="#collapseGrupo{{g.name}}" aria-expanded="true" aria-controls="collapseOne">
+                    <span style="color: #f7f7f7">GRUPO <t t-esc="g.name" /> |</span> <span style="color: #D8D8D8"><t t-esc="g.responsable.name" /></span>
+                  </button>
+                </h2>
+              </div>
+          
+              <div t-attf-id="collapseGrupo{{g.name}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="accordion" id="accordionExample2">
+                  <div class="card-body list-group text-center">
+                    <t t-foreach="publicadores" t-as="p">
+                      <t t-if="g.name == p.grupo.name">
+                        <div id="headingPub">
+                          <button class="btn btn-outline-primary mt-0" style="margin-bottom: 5px" type="button" data-toggle="modal" t-attf-data-target="#collapseForm{{p.id}}" aria-expanded="true"><t t-esc="p.name" /></button>
+                        </div>
+                        <div class="modal fade" tabindex="-1" role="dialog" t-attf-id="collapseForm{{p.id}}" t-attf-aria-labelledby="#collapseForm{{p.id}}Label" data-parent="#accordionExample2">
+                          <div class="modal-dialog">
+                            <div class="modal-content" style="padding: 10px;">
+                              <form action="/panel/submit/" method="post" enctype="multipart/form-data" class="o_mark_required" data-mark="*" data-model_name="" data-success-page="">
+    
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <div class="form-group">
+                                  
+                                  <input type="hidden" class="form-control" id="InputNombre" name="publicador" aria-describedby="horaslHelp" t-attf-placeholder="{{p.name}}" t-attf-value="{{p.id}}" readonly="true"></input>
+                                </div>
+                                <div class="form-group">
+                                 
+                                  <input type="hidden" class="form-control" id="InputTipo" name="tipo_informe" aria-describedby="horaslHelp" t-attf-placeholder="{{p.tipo}}" t-attf-value="{{p.tipo}}" readonly="true"></input>
+                                </div>
+                                <div class="form-group">
+                                  <label for="Horas">Horas</label>
+                                  <input type="number" class="form-control" id="horas" name="horas" aria-describedby="horaslHelp" placeholder="Introduce horas" required="True"></input>
+                                  <small id="horaslHelp" class="form-text text-muted">Recuerda informar valores enteros</small>
+                                </div>
+                                <div class="form-group">
+                                  <label for="Publicaciones">Publicaciones</label>
+                                  <input type="number" class="form-control" id="InputPublicaciones" name="publicaciones" placeholder="Introduce publicaciones" required="True"></input>
+                                </div>
+                                <div class="form-group">
+                                  <label for="Videos">Videos</label>
+                                  <input type="number" class="form-control" id="InputVideos" name="videos" placeholder="Introduce videos" required="True"></input>
+                                </div>
+                                <div class="form-group">
+                                  <label for="Revisitas">Revisitas</label>
+                                  <input type="number" class="form-control" id="InputRevisitas" name="revisitas" placeholder="Introduce revisitas" required="True"></input>
+                                </div>
+                                <div class="form-group">
+                                  <label for="Curso">Cursos Bíblicos</label>
+                                  <input type="number" class="form-control" id="InputCursos" name="cursos" placeholder="Introduce cursos" required="True"></input>
+                                </div>
+                                <div class="form-group">
+                                  <label for="Notas">Notas</label>
+                                  <input type="text" class="form-control" id="InputNotas" name="notas" placeholder="Nota adicional"></input>
+                                </div>
+      
+                                <div class="form-check" style="margin-bottom: 10px">
+                                  <label class="form-check-label" for="exampleCheck1">¿Eres, o tienes permiso de <b><t t-esc="p.name"/></b> para informar?</label>
+                                </div>
+                                <button type="submit" class="btn btn-success" style="margin-bottom: 20px; margin-right: 5px">Sí, enviar</button>
+                                <button type="button" class="btn btn-secondary" style="margin-bottom: 20px; margin-left: 5px" data-dismiss="modal">Cerrar</button>
+                              </form>
+  
+                            </div>
+
+                          </div>
+                          
+                          
+                        </div>
+                      </t>
+                    </t>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            
+            </t>  
+          </div>
+          <button type="button" style="background-color: #9E2667;" class="btn btn-danger mx-auto d-block" onclick="window.location.href = 'https://secretary.raulchiclano.es/password'">Administración</button>
+
+        </body>
+     </t>   
+  </template>  
+
+
+<!--PÁGINA LISTADOS PUBLICADORES PENDIENTES DE INFORMAR-->
+<template id="pendiente">
+  <t t-call="web.html_container">
+    <title>Secretary | Informe</title>
+      <head>
+        <style type="text/css">
+          .btn-outline-primary:active {
+            background-color: #107E8B !important;
+            color: #F5F5F5 !important;
+            border-color: #107E8B !important;
+          }
+          .btn-outline-primary:hover {
+            background-color: #9E2667 !important;
+            color: #F5F5F5 !important;
+            border-color: #9E2667 !important;
+          }
+          .btn-outline-primary {
+            color: #107E8B !important;
+            border-color: #107E8B !important;
+          }
+          .btn-link {
+            color: #107E8B !important;
+          }
+          .btn-outline-primary:focus {
+            box-shadow: none;
+          }
+        </style>
+      </head>
+      <body style="background-color: #f5f5f5">
+        <h3 class="text-center" style="margin-top: 20px"> Publicadores pendientes de informar</h3><p></p>
+        <h4 class="text-center" >Escoja su grupo</h4>
+        
+
+
+        <div class="accordion" id="accordionExample">
+          <t t-foreach="grupos" t-as="g">
+          <div class="card">
+            <div class="card-header text-center" id="headingOne" style="background-color: #107E8B">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block" type="button" data-toggle="collapse" t-attf-data-target="#collapseGrupo{{g.name}}" aria-expanded="true" aria-controls="collapseOne">
+                  <span style="color: #f7f7f7">GRUPO <t t-esc="g.name" /> |</span> <span style="color: #D8D8D8"><t t-esc="g.responsable.name" /></span>
+                </button>
+              </h2>
+            </div>
+        
+            <div t-attf-id="collapseGrupo{{g.name}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div class="accordion" id="accordionExample2">
+                <div class="card-body list-group text-center">
+                  <t t-foreach="publicadores" t-as="p">
+                    <t t-if="g.name == p.grupo.name">
+                      <div id="headingPub" class="text-left">
+                        <h6 style="color: #9E2667; display:inline" ><t t-esc="p.name" /></h6>
+                        <button class="btn btn-success" style="margin-left:10px; margin-bottom:10px">
+                          <a t-att-href="'https://api.whatsapp.com/send?phone=34' + '%s' % (p.telefono) + '&amp;text=%s' % (mensaje)" 
+                            target="_blank"
+                            ><i class="fa fa-whatsapp" style="color:#fff"></i> <span style="color:#f5f5f5">Avisar</span></a>
+                          
+                          
+
+                        </button>
+                      </div>
+                      
+                    </t>
+                  </t>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Mes</th>
+                        <th scope="col">Horas</th>
+                        <th scope="col">Publicaciones</th>
+                        <th scope="col">Revisitas</th>
+                        <th scope="col">Cursos</th>
+                        <th scope="col">Videos</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <t t-foreach="publicadoresConInforme" t-as="p">
+                        <t t-if="g.name == p.grupo.name">
+                        <tr>
+                            <th scope="row"><t t-esc="p.name" /></th>
+                            <td><t t-esc="p.informe_id.fecha" /></td>
+                            <td><t t-esc="p.informe_id.horas" /></td>
+                            <td><t t-esc="p.informe_id.publicaciones" /></td>
+                            <td><t t-esc="p.informe_id.revisitas" /></td>
+                            <td><t t-esc="p.informe_id.cursos" /></td>
+                            <td><t t-esc="p.informe_id.videos" /></td>
+                          </tr>
+                        </t>
+                      </t>
+                    </tbody>
+                  </table>
+                  
+                </div>
+              </div>
+
+            </div>
+          </div>
+          
+          </t>  
+        </div>
+        
+      </body>
+   </t>   
+</template>  
+
+    <!-- LOGIN PAGE-->
+<template id="password">
+  <t t-call="web.html_container">
+    <title>Secretary | Informe</title>
+      <head>
+        <style type="text/css">
+          .gradient-custom {
+            /* fallback for old browsers */
+            background: #6a11cb;
+            
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+            
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+            }
+          .card-fondo {
+            color: #342C2D !important;
+
+        </style>
+      </head>
+      <body class="text-center">
+        <form action="/pendientes/" method="post" enctype="multipart/form-data" class="form-inline o_mark_required" data-mark="*" data-model_name="" data-success-page="">
+          <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+          <div class="form-group mb-2" style="margin-top:50px">
+            
+            
+          </div>
+          <div class="form-group mx-sm-3 mb-2">
+            <h4 class="sr-only">Introduce el código</h4>
+            <label for="inputPassword2" class="sr-only">Password</label>
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password"/>
+          </div>
+          <button type="submit" class="btn btn-primary mb-2">Acceder</button>
+        </form>
+      </body>
+  </t>
+</template>
+
+
+
+</odoo>

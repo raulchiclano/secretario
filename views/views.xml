@@ -1,0 +1,534 @@
+<odoo>
+  <data>
+
+    <!--MODELO PUBLICADORES -->
+
+                      <!--VISTA FORM  -->
+
+    <record id="view_secretary_publicadores_form" model="ir.ui.view">
+      <field name="name">view.secretary.publicadores.form</field>
+      <field name="model">secretary.publicadores</field>
+      <field name="arch" type="xml">
+        <form string="Publicadores">
+          <sheet>
+            <div class="oe_button_box" name="button_box">
+              <button name="f_activo" type="object" class="oe_stat_button" string='Inactivo' icon='fa-toggle-off' attrs="{'invisible':[('activo','=',True),]}"/>
+              <button name="f_activo" type="object" class="oe_stat_button" string='Activo' icon='fa-toggle-on' attrs="{'invisible':[('activo','=',False),]}"/>
+            </div>
+            <group name="group_top" string="DATOS DEL PUBLICADOR">
+              <group name="group_left">
+                <field name="name" />
+                <field name="fecha_nacimiento" />
+                <field name="fecha_bautismo" />
+                <field name="telefono" widget="phone" />
+                <field name="email" widget="email" />
+                <field name="direccion" />
+                <field name="activo" invisible="1"/>
+              </group>
+              <group name="group_right" string="">
+                <field name="genero" widget="radio" />
+                <field name="tipo" widget="radio" />
+                <field name="grupo"/>
+                <field name="nombramiento" widget="radio"/>
+              </group>
+              
+            </group>
+            <notebook>
+              <page string="INFORMES">
+                <field name="informe_id" widget="one2may_list">
+                  <tree>
+                    <field name="fecha"/>
+                    <field name="horas"/>
+                    <field name="revisitas"/>
+                    <field name="publicaciones"/>
+                    <field name="videos"/>
+                    <field name="cursos"/>
+                  </tree>
+                </field>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+                      <!--VISTA TREE  -->
+    <record id="view_secretary_publicadores_tree" model="ir.ui.view">
+      <field name="name">view.secretary.publicadores.tree</field>
+      <field name="model">secretary.publicadores</field>
+      <field name="arch" type="xml">
+        <tree string="Publicadores">
+          <field name="name" />
+          <field name="direccion" />
+          <field name="telefono" />
+          <field name="fecha_nacimiento" />
+          <field name="fecha_bautismo" />
+          <field name="email" />
+        </tree>
+      </field>
+    </record>
+
+                      <!--VISTA KANBAN  -->
+    <record id="view_secretary_publicadores_kanban" model="ir.ui.view">
+      <field name="name">view.secretary.publicadores.kanban </field>
+      <field name="model">secretary.publicadores</field>
+      <field name="arch" type="xml">
+        <kanban default_order="grupo">
+          <field name="name"/>
+          <field name="grupo"/>
+          <field name="tipo"/>
+          <templates>
+            <t t-name="kanban-box">
+              <div t-attf-class="oe_kanban_global_click rounded-lg kanban-publicadores">
+                
+                <div class="card-body text-cool" style="text-align:center">
+                  <h4 class="alert publicadores-name">
+                    <field name="name" />
+                  </h4>
+                  <!--h4><field name="grupo"/></h4-->
+                  
+                </div>
+                <div class="oe_kanban_top_right">
+                  <span class="float-right text-right">
+                     <field name="tipo" widget="label_selection" options="{'classes': {'P': 'primary', 'R': 'info', 'A':'warning',}}"/>
+                  </span>
+                </div>
+                
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <record id="secretary_publicadores_view_search" model="ir.ui.view">
+      <field name="name">secretary.publicadores.view.search</field>
+      <field name="model">secretary.publicadores</field>
+      <field name="arch" type="xml">
+        <search string="Filtrar publicadores">
+          <field name="tipo" />
+          <field name="grupo"/>
+
+          <group expand="1" string="Agrupar por...">
+            <filter name="groupby_tipo" string="Tipo de publicador" domain="[]" context="{'group_by': 'tipo'}" />
+            <filter name="groupby_grupo" string="Grupos de servicio" domain="[]" context="{'group_by': 'grupo'}" />            
+          </group>
+        </search>
+      </field>
+    </record>
+
+
+    <record id="secretary_publicadores_action" model="ir.actions.act_window">
+      <field name="name">Publicadores</field>
+      <field name="res_model">secretary.publicadores</field>
+      <field name="view_mode">kanban,tree,form</field> 
+      <field name="context">{"group_by": "grupo"}</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Publicadores        
+        </p>
+        <p>
+          Click en 'Nuevo' para dar de alta un publicador
+        </p>
+
+      </field>
+    </record>
+
+
+
+    <!--MODELO GRUPOS -->
+
+                      <!--VISTA KANBAN  -->
+
+
+    <record id="view_secretary_grupos_kanban" model="ir.ui.view">
+      <field name="name">view.secretary.grupos.kanban </field>
+      <field name="model">secretary.grupos</field>
+      <field name="arch" type="xml">
+        <kanban class="o_secretary_grupos_kanban">
+          <field name="id"/>
+          <field name="name"/>
+
+          <templates>
+            <t t-name="kanban-box">
+              <div t-attf-class="oe_kanban_global_click kanban-grupos rounded-lg">
+                <div class="oe_kanban_details">
+                  <h3 class="text-center text-cool">
+                    Grupo de servicio: <field class="text-center text-cool" name="name" />
+                  </h3>    
+                  <h5 class="text-center">
+                    Superintendente de Grupo: 
+                  </h5>     
+                  <h6 class="text-cool text-center blockquote-footer">
+                    <field name="responsable"/>
+                  </h6>                       
+                </div>
+                
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <record id="secretary_grupos_action" model="ir.actions.act_window">
+      <field name="name">Grupos de servicio</field>
+      <field name="res_model">secretary.grupos</field>
+      <field name="view_mode">kanban,tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Grupos de Servicio        
+        </p>
+        <p>
+          Click en 'Nuevo' para crear un nuevo grupo de servicio
+        </p>
+
+      </field>
+    </record>
+
+
+
+
+    <!--MODELO INFORMES -->
+                      <!--VISTA FORM  -->
+
+    <record id="view_secretary_informes_form" model="ir.ui.view">
+      <field name="name">view.secretary.informes.form</field>
+      <field name="model">secretary.informes</field>
+      <field name="arch" type="xml">
+        <form string="Informes de predicación">
+          <sheet>
+            <div class="oe_button_box" name="button_box">
+              <button name="este_mes_aux_activo" type="object" class="oe_stat_button" string='Aux.30/50h' icon='fa-check-square-o'/>
+            </div>
+            <group name="group_top" string="NOMBRE DEL PUBLICADOR">
+              <field name="nombre" widget="selection" class="form-row"/>
+              <separator string="DATOS DEL INFORME"/>
+              <group name="group_left" string=' '>
+                <field name="mes" />
+                <field name="horas" />
+                <field name="revisitas" />
+                <field name="publicaciones" />
+              </group>
+              <group name="group_right" string=' '>
+                <field name="año" />
+                <field name="videos" />
+                <field name="cursos" />
+                <field name="tipo_informe" />
+                <field name="este_mes_aux" widget="boolean_toggle"/>
+              </group>
+            </group>
+            <notebook>
+              <page string="Notas adicionales">
+                  <field name="notas" class="form-row"/>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+                      <!--ACTION  -->
+    <record id="secretary_informes_action" model="ir.actions.act_window">
+      <field name="name">Informes de predicación</field>
+      <field name="res_model">secretary.informes</field>
+      <field name="view_mode">kanban,tree,form,graph,calendar</field>      
+      <field name="context">{"search_default_groupby_mes":1, "search_default_filterby_año":1}</field>
+      <field name="help" type="html">
+        <h3 class="oe_view_nocontent_create">
+          INFORMES        
+        </h3>
+        <p>
+          Click en 'Nuevo' para crear un informe
+        </p>
+
+      </field>
+    </record>
+
+                      <!--VISTA TREE  -->
+    <record id="view_secretary_informes_tree" model="ir.ui.view">
+      <field name="name">view.secretary.informes.tree</field>
+      <field name="model">secretary.informes</field>
+      <field name="arch" type="xml">
+        <tree string="Informes">
+          <field name="mes" />
+          <field name="año" />
+          <field name="nombre" />
+          <field name="horas" />
+          <field name="publicaciones" />
+          <field name="revisitas" />
+          <field name="videos" />
+          <field name="cursos" />
+          <field name="notas" />
+        </tree>
+      </field>
+    </record>
+
+
+                      <!--VISTA KANBAN  -->
+
+    <record id="view_secretary_informes_kanban" model="ir.ui.view">
+      <field name="name">view.secretary.informes.kanban </field>
+      <field name="model">secretary.informes</field>
+      <field name="arch" type="xml">
+        <kanban class="o_secretary_informes_kanban">
+          <field name="nombre"/>
+          <field name="año"/>
+          <field name="horas"/>
+          <field name="publicaciones"/>
+          <field name="revisitas"/>
+          <field name="videos"/>
+          <field name="cursos"/>
+          <templates>
+            <t t-name="kanban-box">
+              <div t-attf-class="oe_kanban_global_click rounded-lg kanban-publicadores">
+                <div class="oe_kanban_details">
+                  <h3 class="text-cool">
+                    <field name="nombre" />
+                  </h3>                                
+                  <div class="o_kanban_inline_block" t-if="record.horas.value">
+                    <i id='icon-horas' class="fa fa-tachometer" role="img" aria-label="Horas del informe" />
+                    <strong>
+                      <field name="horas" widget="statinfo"
+                      string="Horas"
+                      icon="fa-calendar"
+                      options="{'label_field': 'label_tasks'}" /> 
+                    </strong>
+                  </div>
+                  <div style="margin-left: 20px" class="o_kanban_inline_block" t-if="record.publicaciones.value">
+                    <i id='icon-publicaciones' class="fa fa-files-o" role="img" aria-label="Horas del informe" />
+                    <strong>
+                      <field name="publicaciones" widget="statinfo"
+                      string="Publicaciones"
+                      icon="fa-files-o"
+                      help="Publicaciones"
+                      options="{'label_field': 'label_tasks'}" /> 
+                    </strong>
+                  </div>
+                  <div class="o_kanban_inline_block" t-if="record.revisitas.value">
+                    <i id='icon-revisitas' class="fa fa-repeat" role="img" aria-label="Revisitas del informe" />
+                    <strong>
+                      <field name="revisitas" widget="statinfo"
+                      string="Revisitas"
+                      icon="fa-calendar"
+                      options="{'label_field': 'label_tasks'}" /> 
+                    </strong>
+                  </div>
+                  <div style="margin-left: 20px" class="o_kanban_inline_block" t-if="record.videos.value">
+                    <i id='icon-videos' class="fa fa-youtube-play" role="img" aria-label="Videos del informe" />
+                    <strong>
+                      <field name="videos" widget="statinfo"
+                      string="Videos"
+                      icon="fa-calendar"
+                      options="{'label_field': 'label_tasks'}" /> 
+                    </strong>
+                  </div>
+                  <div t-if="record.cursos.value">
+                    <i id='icon-cursos' class="fa fa-suitcase" role="img" aria-label="Cursos del informe" />
+                    <strong>
+                      <field name="cursos" widget="statinfo"
+                      string="Cursos"
+                      icon="fa-calendar"
+                      options="{'label_field': 'label_tasks'}" /> 
+                    </strong>
+                  </div>
+                  
+                </div>
+                
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <record id="secretary_informes_view_search" model="ir.ui.view">
+      <field name="name">secretary.informes.view.search</field>
+      <field name="model">secretary.informes</field>
+      <field name="arch" type="xml">
+        <search string="Filtrar Informes">
+          <field name="fecha" />
+          <group expand="1" string="Agrupar por...">
+            <filter name="groupby_mes" string="Agrupados por mes" domain="[]" context="{'group_by': 'fecha'}" />
+          </group>
+          <filter name="filterby_año" string="Año actual" domain="[('año', '=', '2023')]" />
+        
+        </search>
+      </field>
+    </record>
+
+    <record id="view_secretary_informes_graph" model="ir.ui.view">
+      <field name="name">view.secretary.informes.graph</field>
+      <field name="model">secretary.informes</field>
+      <field name="arch" type="xml">
+        <graph type="pie" string="Totales">
+          <field name="mes" type="row"/>
+          <field name="horas" type="measure"/>
+
+        </graph>
+      </field>
+    </record>
+
+    <record id="view_secretary_informes_calendar" model="ir.ui.view">
+      <field name="name">view.secretary.informes.calendar</field>
+      <field name="model">secretary.informes</field>
+      <field name="arch" type="xml">
+        <calendar string="Tareas" date_start="fecha" event_open_popup="true" mode="year" color="fecha">
+          <field name="fecha"></field>
+        </calendar>
+      </field>
+    </record>
+
+   
+
+    <!--MODELO REGISTROS PUBLICADOR S-21 -->
+
+    <!-- Vista Form-->
+    <record id="wizard_registro_publicadores_view" model="ir.ui.view">
+      <field name="name">Formularios de Registro de publicador de la congregación</field>
+      <field name="model">secretary.registro_publicador_report</field>
+      <field name="arch" type="xml">
+        <form string="Selecione año a generar">
+          <group>
+            <field name="año_servicio" />
+          </group>
+          <footer>
+            <button name="print_report_formularios_registro_publicador" string="Generar S-21" class="oe_right oe_highlight" type="object"/>
+            <button special="cancel" string="Cancelar" class="oe_right oe_highlight"/>
+            <button name="test" string="Test" class="oe_right oe_highlight" type="object"/>
+
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <!-- Vista Actions-->
+    <record id="secretary_registro_publicadores_wizard" model="ir.actions.act_window">
+      <field name="name">Formularios de Registro de publicador de la congregación</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">secretary.registro_publicador_report</field>
+      <field name="view_id" ref="wizard_registro_publicadores_view"/>
+      <field name="view_mode">form</field>      
+      <field name="target">new</field>
+    </record>
+
+    <!--MODELO TOTALES MENSUALES -->
+
+    <!-- Vista Form-->
+    <record id="wizard_totales_mensuales_view" model="ir.ui.view">
+      <field name="name">Generar informe mensual</field>
+      <field name="model">secretary.totales_mensuales_report</field>
+      <field name="arch" type="xml">
+        <form string="Generar resumen del mes">
+          <group>
+            <field name="mes_seleccionado" />
+          </group>
+          <footer>
+            <button name="print_report_totales_mensuales" string="Imprimir" class="oe_right oe_highlight" type="object"/>
+            <button name="get_publicadores_irregulares" string="Test" class="oe_right oe_highlight" type="object"/>
+            <button special="cancel" string="Cancelar" class="oe_right oe_highlight"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <!-- Vista Actions-->
+    <record id="secretary_totales_mensuales_wizard" model="ir.actions.act_window">
+      <field name="name">Totales Mensuales</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">secretary.totales_mensuales_report</field>
+      <field name="view_id" ref="wizard_totales_mensuales_view"/>
+      <field name="view_mode">form</field>      
+      <field name="target">new</field>
+    </record>
+
+
+
+    <!--MODELO TOTALES POR GRUPOS -->
+
+    <!-- Vista Form-->
+    <record id="wizard_totales_porgrupo_view" model="ir.ui.view">
+      <field name="name">Generar informe por grupos de servicio</field>
+      <field name="model">secretary.totales_porgrupo_report</field>
+      <field name="arch" type="xml">
+        <form string="Generar resumen del grupo">
+          <group>
+            <field name="grupo_seleccionado" />
+          </group>
+          <footer>
+            <button name="print_report_totales_porgrupo" string="Imprimir" class="oe_right oe_highlight" type="object"/>
+            <button name="get_publicadores_porgrupo" string="Test" class="oe_right oe_highlight" type="object"/>
+            <button special="cancel" string="Cancelar" class="oe_right oe_highlight"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <!-- Vista Actions-->
+    <record id="secretary_totales_porgrupo_wizard" model="ir.actions.act_window">
+      <field name="name">Totales por grupo</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">secretary.totales_porgrupo_report</field>
+      <field name="view_id" ref="wizard_totales_porgrupo_view"/>
+      <field name="view_mode">form</field>      
+      <field name="target">new</field>
+    </record>
+
+
+
+        <!--MENUS COMUNES -->
+
+    <menuitem id="menu_secretary_root" name="Secretary" sequence="10" />
+    <menuitem id="menu_secretary_publicadores" name="Publicadores" parent="menu_secretary_root" sequence="0" />
+    <menuitem
+      id="menu_secretary_publicador"
+      name="Publicador"
+      action="secretary_publicadores_action"     
+      parent="menu_secretary_publicadores"
+      sequence="0"/>
+    <menuitem
+      id="menu_secretary_grupos"
+      name="Grupos"
+      action="secretary_grupos_action"     
+      parent="menu_secretary_publicadores"
+      sequence="0"/>
+
+    <menuitem id="menu_secretary_informes" name="Informes" parent="menu_secretary_root" sequence="0" />
+    <menuitem
+    id="menu_secretary_informe"
+    name="Ver informes"
+    action="secretary_informes_action"     
+    parent="menu_secretary_informes"
+    sequence="0"/>
+
+
+
+    <menuitem
+    id="menu_secretary_totales"
+    name="Totales"
+    parent="menu_secretary_root"
+    sequence="0"/>
+
+    <menuitem
+    id="menu_secretary_registro_publicador"
+    name="Generar Formularios S-21"
+    parent="menu_secretary_totales"
+    action="secretary_registro_publicadores_wizard"
+    sequence="0"/>
+    <menuitem
+    id="menu_secretary_totales_mensuales"
+    name="Totales mensuales"
+    action="secretary_totales_mensuales_wizard"     
+    parent="menu_secretary_totales"
+    sequence="0"/>
+    <menuitem
+    id="menu_secretary_totales_porgrupo"
+    name="Totales por grupo"
+    action="secretary_totales_porgrupo_wizard"     
+    parent="menu_secretary_totales"
+    sequence="0"/>
+
+
+
+  </data>
+</odoo>
