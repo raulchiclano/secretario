@@ -64,7 +64,7 @@ class Panel(http.Controller):
             'año' : año_default,
             'revisitas': post.get('revisitas'),
             'cursos' : post.get('cursos'),
-            'videos' : post.get('videos'),
+            'videos' : post.get('videos'),                                                    
             'publicaciones' : post.get('publicaciones'),
             'tipo_informe' : post.get('tipo_informe'),
             'año' : año,

@@ -363,12 +363,12 @@
                         <t t-if="g.name == p.grupo.name">
                         <tr>
                             <th scope="row"><t t-esc="p.name" /></th>
-                            <td><t t-esc="p.informe_id.fecha" /></td>
-                            <td><t t-esc="p.informe_id.horas" /></td>
-                            <td><t t-esc="p.informe_id.publicaciones" /></td>
-                            <td><t t-esc="p.informe_id.revisitas" /></td>
-                            <td><t t-esc="p.informe_id.cursos" /></td>
-                            <td><t t-esc="p.informe_id.videos" /></td>
+                            <td><t t-esc="p.informe_id[-1].fecha" /></td>
+                            <td><t t-esc="p.informe_id[-1].horas" /></td>
+                            <td><t t-esc="p.informe_id[-1].publicaciones" /></td>
+                            <td><t t-esc="p.informe_id[-1].revisitas" /></td>
+                            <td><t t-esc="p.informe_id[-1].cursos" /></td>
+                            <td><t t-esc="p.informe_id[-1].videos" /></td>
                           </tr>
                         </t>
                       </t>
