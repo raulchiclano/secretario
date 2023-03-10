@@ -39,7 +39,7 @@ class publicadores(models.Model):
      tipo = fields.Selection([('P','Publicador'), ('A', 'Auxiliar'), ('R','Regular')], string='Tipo', required=True)
      grupo = fields.Many2one(string='Grupo de Servicio', comodel_name="secretary.grupos")
      email = fields.Char(string='Email')
-     image = fields.Binary(string='Imagen')
+     pdf = fields.Binary(string='S-21 Antiguo')
      activo = fields.Boolean(string='Activo', default='True', readonly=True)
      informe_id = fields.One2many("secretary.informes", "nombre", string="Mis Informes")
 
@@ -313,7 +313,7 @@ class TotalesMensuales(models.TransientModel):
         return self.env.ref('secretary.action_totalesporGrupo_report').report_action(self)
 
 
-
+         
     def get_publicadores_porgrupo(self):
         lista_porgrupos = self.env['secretary.publicadores'].search([('grupo','=',self.grupo_seleccionado),])
         print("Debug: lista_porgrupos_____________",lista_porgrupos, flush=True)

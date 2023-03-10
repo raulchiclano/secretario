@@ -30,6 +30,7 @@
                 <field name="tipo" widget="radio" />
                 <field name="grupo"/>
                 <field name="nombramiento" widget="radio"/>
+                <field name="pdf" widget="binary" filename="s-21.pdf" string="S-21"/>
               </group>
               
             </group>
