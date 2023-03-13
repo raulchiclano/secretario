@@ -140,7 +140,7 @@ class informes(models.Model):
 
      @api.constrains('horas')
      def _validate_horas(self):
-        if self.horas <= 0:
+        if self.horas < 0:
             raise exceptions.ValidationError('¡CUIDADO: EL valor de las HORAS no debe de ser menor a 0!')
 
    
@@ -175,12 +175,17 @@ class RegistroPublicador(models.TransientModel):
         return menu_año
 
     año_servicio = fields.Selection(_año_servicio_sort, string= "Seleccione año de servicio a generar reporte")
+    #activo = fields.Boolean(string='Activo', default='True')
    
     def print_report_formularios_registro_publicador(self):
         return self.env.ref('secretary.action_registroPublicador_report').report_action(self)
 
     def get_publicadores_por_año(self):
-        lista_por_año = self.env['secretary.publicadores'].search([('informe_id.año','=',self.año_servicio),])
+        #if self.activo == 'True':
+        lista_por_año = self.env['secretary.publicadores'].search([('informe_id.año','=',self.año_servicio),('activo','=','True')])
+        #else:
+        #    lista_por_año = self.env['secretary.publicadores'].search([('informe_id.año','=',self.año_servicio),('activo','=','False')])
+            
         print("Debug: lista_por_año_____________",lista_por_año, flush=True)
         #for publicador in lista_por_año:
         #    print("Debug: nombre______", publicador.grupo[0]['name'], flush=True)
@@ -280,7 +285,7 @@ class TotalesMensuales(models.TransientModel):
 
     def get_publicadores_irregulares(self):
         lista_conInforme = self.env['secretary.publicadores'].search([('informe_id.fecha','=',self.mes_seleccionado)])
-        lista_total = self.env['secretary.publicadores'].search([])
+        lista_total = self.env['secretary.publicadores'].search([('activo','=','True'),])
         print("Debug: lista_conInforme_____________",lista_conInforme, flush=True)
         print("Debug: lista_total_____________",lista_total, flush=True)
         lista_irregulares = lista_total - lista_conInforme
@@ -315,7 +320,7 @@ class TotalesMensuales(models.TransientModel):
 
          
     def get_publicadores_porgrupo(self):
-        lista_porgrupos = self.env['secretary.publicadores'].search([('grupo','=',self.grupo_seleccionado),])
+        lista_porgrupos = self.env['secretary.publicadores'].search([('grupo','=',self.grupo_seleccionado),('activo','=','True'),])
         print("Debug: lista_porgrupos_____________",lista_porgrupos, flush=True)
         #for publicador in lista_porgrupos:
         #    print("Debug: nombre______", publicador.grupo[0]['name'], flush=True)

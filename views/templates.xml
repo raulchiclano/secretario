@@ -171,7 +171,7 @@
 
 
 
-      <!--IMPRESION TARJETAS S-21 POR PUBLICADOR-->
+      <!--IMPRESION TARJETAS S-21 POR PUBLICADOR> BORRADO POR NO FUNCIONAR
       <t t-set="total_publicadores" t-value="docs.get_publicadores_por_año()" />
       <t t-foreach="total_publicadores" t-as="publicador">
         <t t-call="web.basic_layout">
@@ -308,7 +308,7 @@
             </table>
           </div>
         </t>
-      </t>
+      </t-->
       
         </t>
       </t>
