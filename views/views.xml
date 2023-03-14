@@ -476,6 +476,36 @@
     </record>
 
 
+    <!--MODELO TOTALES POR PRECURSORES -->
+
+    <!-- Vista Form-->
+    <record id="wizard_totales_porprecursor_view" model="ir.ui.view">
+      <field name="name">Generar informe solo de precursores</field>
+      <field name="model">secretary.totales_porprecursores_report</field>
+      <field name="arch" type="xml">
+        <form string="Generar resumen del grupo">
+          <group>
+            <field name="tipo_precursor"/>
+          </group>
+          <footer>
+            <button name="print_report_totales_porprecursor" string="Imprimir" class="oe_right oe_highlight" type="object"/>
+            <!--button name="get_publicadores_porgrupo" string="Test" class="oe_right oe_highlight" type="object"/-->
+            <button special="cancel" string="Cancelar" class="oe_right oe_highlight"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <!-- Vista Actions-->
+    <record id="secretary_totales_porprecusor_wizard" model="ir.actions.act_window">
+      <field name="name">Totales por precursor</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">secretary.totales_porprecursores_report</field>
+      <field name="view_id" ref="wizard_totales_porprecursor_view"/>
+      <field name="view_mode">form</field>      
+      <field name="target">new</field>
+    </record>
+
 
         <!--MENUS COMUNES -->
 
@@ -526,6 +556,12 @@
     id="menu_secretary_totales_porgrupo"
     name="Totales por grupo"
     action="secretary_totales_porgrupo_wizard"     
+    parent="menu_secretary_totales"
+    sequence="0"/>
+    <menuitem
+    id="menu_secretary_totales_porprecursor"
+    name="Totales por Precursor"
+    action="secretary_totales_porprecusor_wizard"     
     parent="menu_secretary_totales"
     sequence="0"/>
 

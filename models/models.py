@@ -326,7 +326,29 @@ class TotalesMensuales(models.TransientModel):
         #    print("Debug: nombre______", publicador.grupo[0]['name'], flush=True)
         return lista_porgrupos
         
+# NUEVO  ---  MODELO PARA REPORTE TOTALES POR PRECURSORES       
+class TotalesMensuales(models.TransientModel):
+    _name = 'secretary.totales_porprecursores_report'
+    _description = 'Tarjetas S-21 de los precursores reg/aux'
+   # _inherit = 'secretary.informes'
+   # _auto = False
+   # _rec_name = 'id'
+
+
+    tipo_precursor = fields.Selection([('A', 'Auxiliar'), ('R','Regular')], string= "Tipo de Precursor", default='R')
+    
+    def print_report_totales_porprecursor(self):
+        return self.env.ref('secretary.action_totalesporPrecursor_report').report_action(self)
+
+
          
+    def get_publicadores_porprecursor(self):
+        lista_por_regular = self.env['secretary.publicadores'].search([('tipo','=',self.tipo_precursor),('activo','=','True'),])
+        print("Debug: lista_porprecursores_____________",lista_por_regular, flush=True)
+        #for publicador in lista_porgrupos:
+        #    print("Debug: nombre______", publicador.grupo[0]['name'], flush=True)
+        return lista_por_regular
+          
  
 # MODELO PARA REPORTE TARJETA DE PUBLICADORES       
 class InformesReport(models.AbstractModel):

@@ -30,6 +30,7 @@
         'reports/informe.xml',
         'reports/totales_mensuales.xml',
         'reports/totales_porgrupo.xml',
+        'reports/totales_porprecursor.xml',
         'reports/registro_publicador.xml',
     ],
     # only loaded in demonstration mode

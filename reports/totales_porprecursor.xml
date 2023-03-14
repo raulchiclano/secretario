@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_totalesporPrecursor_report" model="ir.actions.report">
+            <field name="name">Totales por Precursor</field>
+            <field name="model">secretary.totales_porprecursores_report</field><!-- Especifica el modelo de donde coge los datos-->
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">secretary.report_totalesPorPrecursor</field><!-- Identifica el template (external ID) usado para renderizar el reporte-->
+            <field name="print_report_name">'Tarjetas_S-21_%s' % (object.tipo_precursor)</field>
+            <field name="paperformat_id" ref="secretary.format_total_por_precursores"/>
+            <!--field name="binding_model_id" ref="model_secretary_informes"></field-->
+        </record>
+    </data>
+</odoo>
