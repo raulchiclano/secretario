@@ -43,7 +43,7 @@ class Panel(http.Controller):
         today = date.today().day
         Grupos = http.request.env['secretary.grupos']
         Publicadores = http.request.env['secretary.publicadores']
-        if today >15:
+        if today >20:
             return redirect('/demasiadopronto')
         else:
             return http.request.render('secretary.enviarinforme', {

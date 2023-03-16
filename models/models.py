@@ -252,8 +252,13 @@ class TotalesMensuales(models.TransientModel):
             [('horas:sum'),('publicaciones:sum'),('videos:sum'),('revisitas:sum'),('cursos:sum')], # FUNCTION IN SELECT; SELECT SUM (cv) AS total
             ['tipo_informe'] # GROUPBY
         )
-        print(grouped, flush=True)
+        #print(grouped, flush=True)
         return grouped # devuelve array de tuplas
+    
+    def get_totales_mensuales_por_publicador(self):
+        listado = self.env['secretary.informes'].search([('fecha', '=', self.mes_seleccionado),])
+        print(listado, flush=True)
+        return listado # devuelve array de tuplas
 
     def get_totales(self):
         total = self.env['secretary.informes'].read_group(
@@ -286,10 +291,10 @@ class TotalesMensuales(models.TransientModel):
     def get_publicadores_irregulares(self):
         lista_conInforme = self.env['secretary.publicadores'].search([('informe_id.fecha','=',self.mes_seleccionado)])
         lista_total = self.env['secretary.publicadores'].search([('activo','=','True'),])
-        print("Debug: lista_conInforme_____________",lista_conInforme, flush=True)
-        print("Debug: lista_total_____________",lista_total, flush=True)
+        #print("Debug: lista_conInforme_____________",lista_conInforme, flush=True)
+        #print("Debug: lista_total_____________",lista_total, flush=True)
         lista_irregulares = lista_total - lista_conInforme
-        print("Debug: lista_irregulares_____________",lista_irregulares, flush=True)
+        #print("Debug: lista_irregulares_____________",lista_irregulares, flush=True)
 
         for publicador in lista_irregulares:
             print("Debug: nombre______", publicador.grupo[0]['name'], flush=True)
