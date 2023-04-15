@@ -562,7 +562,7 @@
                   <tr t-if="informe_individual.nombre.grupo.id == 1">
                     <th scope="row"><span t-field="informe_individual.nombre.grupo.id"/></th>
                     <td><span t-field="informe_individual.nombre.name"/> |<strong><span t-if="informe_individual.tipo_informe != 'P'" t-field="informe_individual.tipo_informe"/></strong></td>
-                    <td class="text-center"><t t-if="informe_individual.tipo_informe == 'R' and informe_individual.horas &lt; 50"><span style="color:red" t-field="informe_individual.horas"/></t><t t-elif="informe_individual.tipo_informe == 'A' and informe_individual.horas &lt; 30"><span style="color:red" t-field="informe_individual.horas"/></t><t t-else=""><span t-field="informe_individual.horas"/></t></td>
+                    <td class="text-center"><t t-if="informe_individual.tipo_informe == 'R' and informe_individual.horas &lt; 50"><span style="color:blue" t-field="informe_individual.horas"/></t><t t-elif="informe_individual.tipo_informe == 'A' and informe_individual.horas &lt; 15"><span style="color:blue" t-field="informe_individual.horas"/></t><t t-elif="informe_individual.tipo_informe == 'P' and informe_individual.horas == 0"><span style="color:red" t-field="informe_individual.horas"/></t><t t-else=""><span t-field="informe_individual.horas"/></t></td>
                     <td class="text-center"><span t-field="informe_individual.publicaciones"/></td>
                     <td class="text-center"><span t-field="informe_individual.revisitas"/></td>
                     <td class="text-center"><span t-field="informe_individual.videos"/></td>
@@ -604,7 +604,7 @@
                   <tr t-if="informe_individual.nombre.grupo.id == 2">
                     <th scope="row"><span t-field="informe_individual.nombre.grupo.id"/></th>
                     <td><span t-field="informe_individual.nombre.name"/> |<strong><span t-if="informe_individual.tipo_informe != 'P'" t-field="informe_individual.tipo_informe"/></strong></td>
-                    <td class="text-center"><t t-if="informe_individual.tipo_informe == 'R' and informe_individual.horas &lt; 50"><span style="color:red" t-field="informe_individual.horas"/></t><t t-elif="informe_individual.tipo_informe == 'A' and informe_individual.horas &lt; 30"><span style="color:red" t-field="informe_individual.horas"/></t><t t-else=""><span t-field="informe_individual.horas"/></t></td>
+                    <td class="text-center"><t t-if="informe_individual.tipo_informe == 'R' and informe_individual.horas &lt; 50"><span style="color:blue" t-field="informe_individual.horas"/></t><t t-elif="informe_individual.tipo_informe == 'A' and informe_individual.horas &lt; 15"><span style="color:blue" t-field="informe_individual.horas"/></t><t t-elif="informe_individual.tipo_informe == 'P' and informe_individual.horas == 0"><span style="color:red" t-field="informe_individual.horas"/></t><t t-else=""><span t-field="informe_individual.horas"/></t></td>
                     <td class="text-center"><span t-field="informe_individual.publicaciones"/></td>
                     <td class="text-center"><span t-field="informe_individual.revisitas"/></td>
                     <td class="text-center"><span t-field="informe_individual.videos"/></td>
@@ -646,7 +646,7 @@
                   <tr t-if="informe_individual.nombre.grupo.id == 3">
                     <th scope="row"><span t-field="informe_individual.nombre.grupo.id"/></th>
                     <td><span t-field="informe_individual.nombre.name"/> |<strong><span t-if="informe_individual.tipo_informe != 'P'" t-field="informe_individual.tipo_informe"/></strong></td>
-                    <td class="text-center"><t t-if="informe_individual.tipo_informe == 'R' and informe_individual.horas &lt; 50"><span style="color:red" t-field="informe_individual.horas"/></t><t t-elif="informe_individual.tipo_informe == 'A' and informe_individual.horas &lt; 30"><span style="color:red" t-field="informe_individual.horas"/></t><t t-else=""><span t-field="informe_individual.horas"/></t></td>
+                    <td class="text-center"><t t-if="informe_individual.tipo_informe == 'R' and informe_individual.horas &lt; 50"><span style="color:blue" t-field="informe_individual.horas"/></t><t t-elif="informe_individual.tipo_informe == 'A' and informe_individual.horas &lt; 15"><span style="color:blue" t-field="informe_individual.horas"/></t><t t-elif="informe_individual.tipo_informe == 'P' and informe_individual.horas == 0"><span style="color:red" t-field="informe_individual.horas"/></t><t t-else=""><span t-field="informe_individual.horas"/></t></td>
                     <td class="text-center"><span t-field="informe_individual.publicaciones"/></td>
                     <td class="text-center"><span t-field="informe_individual.revisitas"/></td>
                     <td class="text-center"><span t-field="informe_individual.videos"/></td>
@@ -688,7 +688,7 @@
                   <tr t-if="informe_individual.nombre.grupo.id == 4">
                     <th scope="row"><span t-field="informe_individual.nombre.grupo.id"/></th>
                     <td><span t-field="informe_individual.nombre.name"/> |<strong><span t-if="informe_individual.tipo_informe != 'P'" t-field="informe_individual.tipo_informe"/></strong></td>
-                    <td class="text-center"><t t-if="informe_individual.tipo_informe == 'R' and informe_individual.horas &lt; 50"><span style="color:red" t-field="informe_individual.horas"/></t><t t-elif="informe_individual.tipo_informe == 'A' and informe_individual.horas &lt; 30"><span style="color:red" t-field="informe_individual.horas"/></t><t t-else=""><span t-field="informe_individual.horas"/></t></td>
+                    <td class="text-center"><t t-if="informe_individual.tipo_informe == 'R' and informe_individual.horas &lt; 50"><span style="color:blue" t-field="informe_individual.horas"/></t><t t-elif="informe_individual.tipo_informe == 'A' and informe_individual.horas &lt; 15"><span style="color:blue" t-field="informe_individual.horas"/></t><t t-elif="informe_individual.tipo_informe == 'P' and informe_individual.horas == 0"><span style="color:red" t-field="informe_individual.horas"/></t><t t-else=""><span t-field="informe_individual.horas"/></t></td>
                     <td class="text-center"><span t-field="informe_individual.publicaciones"/></td>
                     <td class="text-center"><span t-field="informe_individual.revisitas"/></td>
                     <td class="text-center"><span t-field="informe_individual.videos"/></td>
@@ -730,7 +730,7 @@
                   <tr t-if="informe_individual.nombre.grupo.id == 5">
                     <th scope="row"><span t-field="informe_individual.nombre.grupo.id"/></th>
                     <td><span t-field="informe_individual.nombre.name"/> |<strong><span t-if="informe_individual.tipo_informe != 'P'" t-field="informe_individual.tipo_informe"/></strong></td>
-                    <td class="text-center"><t t-if="informe_individual.tipo_informe == 'R' and informe_individual.horas &lt; 50"><span style="color:red" t-field="informe_individual.horas"/></t><t t-elif="informe_individual.tipo_informe == 'A' and informe_individual.horas &lt; 30"><span style="color:red" t-field="informe_individual.horas"/></t><t t-else=""><span t-field="informe_individual.horas"/></t></td>
+                    <td class="text-center"><t t-if="informe_individual.tipo_informe == 'R' and informe_individual.horas &lt; 50"><span style="color:blue" t-field="informe_individual.horas"/></t><t t-elif="informe_individual.tipo_informe == 'A' and informe_individual.horas &lt; 15"><span style="color:blue" t-field="informe_individual.horas"/></t><t t-elif="informe_individual.tipo_informe == 'P' and informe_individual.horas == 0"><span style="color:red" t-field="informe_individual.horas"/></t><t t-else=""><span t-field="informe_individual.horas"/></t></td>
                     <td class="text-center"><span t-field="informe_individual.publicaciones"/></td>
                     <td class="text-center"><span t-field="informe_individual.revisitas"/></td>
                     <td class="text-center"><span t-field="informe_individual.videos"/></td>

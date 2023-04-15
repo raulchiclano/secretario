@@ -14,13 +14,19 @@ def auth_function(self, **kwargs):
         return False
     return Pendientes.check_password(password, 'secret_password')
 
-class Test (http.Controller):
+class DemasiadoPronto (http.Controller):
 
     @http.route('/demasiadopronto', auth='public')
     def index(self, **kw):
         return http.request.render("secretary.demasiadopronto")
     
 
+class DemasiadoPronto (http.Controller):
+
+    @http.route('/test', auth='public')
+    def index(self, **kw):
+        return http.request.render("secretary.test")
+    
 
 class Panel(http.Controller):
     #En desuso
@@ -43,7 +49,7 @@ class Panel(http.Controller):
         today = date.today().day
         Grupos = http.request.env['secretary.grupos']
         Publicadores = http.request.env['secretary.publicadores']
-        if today >20:
+        if today >15:
             return redirect('/demasiadopronto')
         else:
             return http.request.render('secretary.enviarinforme', {
