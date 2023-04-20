@@ -46,7 +46,10 @@ class publicadores(models.Model):
 
 
 
-
+     def current_year(self):
+        year = date.today().year
+        return str(year)        
+   
      def f_activo(self):
         self.activo = not self.activo
 
@@ -363,11 +366,15 @@ class InformesReport(models.AbstractModel):
     def _get_report_values(self, docids, data=None):
         report_obj = self.env['ir.actions.report']
         report = report_obj._get_report_from_name('secretary.report_tarjeta_publicador')
+       
         return {
             'doc_ids': docids,
             'doc_model': self.env['secretary.publicadores'],
-            'docs': self.env['secretary.publicadores'].browse(docids)
+            'docs': self.env['secretary.publicadores'].browse(docids),
+            
+
         }
+
 
 
 

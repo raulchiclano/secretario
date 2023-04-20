@@ -411,9 +411,12 @@
                   <table class="text-center" style="width:100%; margin-top: 0px; font-size: 11px;">
                     <colgroup span="1" style="width:10%; font-size:10px;" />
                     <thead>
+                      <t t-set="year" t-value="docs.current_year()"/>
+                      <t t-set="last_year" t-value="str(int(docs.current_year())-1)"/>
+                      <t t-log="year"/>
                       <tr>
                         <!--Las Cabeceras de nuestra tabla-->
-                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Mes</th>
+                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Año: <span t-out="last_year"/>/<span t-out="year"/></th>
                         <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Publicaciones</th>
                         <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Videos</th>
                         <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Horas</th>
@@ -424,7 +427,8 @@
                     </thead>
                     <tbody>
                       <t t-set="informes" t-value="publicador.mapped('informe_id')" />
-                      <tr t-foreach="informes" t-as="informe">
+                      
+                      <!--tr t-foreach="informes" t-as="informe">
                         <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
                           <span t-field="informe.fecha" />
                         </td>
@@ -446,7 +450,81 @@
                         <td style="border: 1px solid black;  border-collapse: collapse; border-right: 0px;">
                           <span t-field="informe.notas" />
                         </td>
+                      </tr-->
+                      <tr t-foreach='[("Septiembre","9",last_year),("Octubre","10",last_year),("Noviembre","11",last_year),("Diciembre","12",last_year),("Enero","1",year),("Febrero","2",year),("Marzo","3",year),("Abril","4",year),("Mayo","5",year),("Junio","6",year),("Julio","7",year),("Agosto","8",year),]' t-as="fila">
+                        <th  scope="row" class="text-center" style="height: 18px; border: 1px solid black;  border-collapse: ollapse; border-left: 0px;">
+                          <span t-out="fila[0]"/>
+                        </th>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
+                          <t t-foreach="informes" t-as="informe">
+                            <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
+                              <span t-field="informe.publicaciones" />
+                            </t>
+                          </t>
+                        </td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
+                          <t t-foreach="informes" t-as="informe">
+                            <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
+                              <span t-field="informe.videos" />
+                            </t>
+                          </t>
+                        </td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
+                          <t t-foreach="informes" t-as="informe">
+                            <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
+                              <span t-field="informe.horas" />
+                            </t>
+                          </t>
+                        </td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
+                          <t t-foreach="informes" t-as="informe">
+                            <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
+                              <span t-field="informe.revisitas" />
+                            </t>
+                          </t>
+                        </td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
+                          <t t-foreach="informes" t-as="informe">
+                            <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
+                              <span t-field="informe.cursos" />
+                            </t>
+                          </t>
+                        </td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;border-right: 0px;">
+                          <t t-foreach="informes" t-as="informe">
+                            <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
+                              <span t-field="informe.notas" />
+                            </t>
+                          </t>
+                        </td>
                       </tr>
+                      <!--FILA TOTALES-->
+                      <tr>
+                      <th  scope="row" style="height: 18px; border: 1px solid black;  border-collapse: ollapse; border-left: 0px;">
+                          Totales:
+                        </th>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="sum(informe.publicaciones for informe in informes)"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="sum(informe.videos for informe in informes)"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="sum(informe.horas for informe in informes)"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="sum(informe.revisitas for informe in informes)"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="sum(informe.cursos for informe in informes)"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;border-right: 0px;"></td>
+                        
+                      </tr>
+                      <!--FILA PROMEDIOS-->
+                      <tr>
+                      <th  scope="row" style="height: 18px; border: 1px solid black;  border-collapse: ollapse; border-left: 0px">
+                          Promedio:
+                        </th>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="round(sum(informe.publicaciones for informe in informes) / len(informes), 2)"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="round(sum(informe.videos for informe in informes) / len(informes), 2)"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="round(sum(informe.horas for informe in informes) / len(informes), 2)"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="round(sum(informe.revisitas for informe in informes) / len(informes), 2)"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="round(sum(informe.cursos for informe in informes) / len(informes), 2)"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;border-right: 0px;"></td>
+                        
+                      </tr>
+                      
                     </tbody>
                   </table>
                 </div>
@@ -468,6 +546,8 @@
       <field name="header_spacing">10</field>
 
     </record>
+
+
 
 
     <!-- REPORTE DEL TOTAL MENSUAL-->
