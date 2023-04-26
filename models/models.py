@@ -210,12 +210,17 @@ class RegistroPublicador(models.TransientModel):
         lista = [8,9,10,11]
         for l in lista:
             self.get_informes_por_tipo(l)
+
+    def current_year(self):
+        year = date.today().year
+        return str(year) 
             
-    def get_informes_por_tipo(self,x):
+    def get_informes_por_tipo(self,x,y):
         mes=x
+        año = y
         grouped = self.env['secretary.informes'].read_group(
-                [('fecha', '=', '%s-%s' %(mes,self.año_servicio)),],# WHERE
-                [('horas:sum'),('publicaciones:sum'),('videos:sum'),('revisitas:sum'),('cursos:sum')], # FUNCTION IN SELECT; SELECT SUM (cv) AS total
+                [('fecha', '=', '%s-%s' %(mes,año)),],# WHERE
+                [('mes'),('año'),('horas:sum'),('publicaciones:sum'),('videos:sum'),('revisitas:sum'),('cursos:sum')], # FUNCTION IN SELECT; SELECT SUM (cv) AS total
                 ['tipo_informe'] # GROUPBY
             )
         print("mes es --->",mes, flush=True)
@@ -349,6 +354,9 @@ class TotalesMensuales(models.TransientModel):
         return self.env.ref('secretary.action_totalesporPrecursor_report').report_action(self)
 
 
+    def current_year(self):
+        year = date.today().year
+        return str(year)
          
     def get_publicadores_porprecursor(self):
         lista_por_regular = self.env['secretary.publicadores'].search([('tipo','=',self.tipo_precursor),('activo','=','True'),])

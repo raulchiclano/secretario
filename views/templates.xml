@@ -2,7 +2,7 @@
   <data>
 
 
-    <!-- REPORTE REGISTRO PUBLICADOR S-21 -->
+    <!-- REPORTE TOTALES PUBLICADORES | REGULARES | AUXILIARES S-21 -->
     <!-- FORMATO PAPEL-->
     <record id="format_S-21" model="report.paperformat">
       <field name="name">Tarjeta Publicadores</field>
@@ -117,6 +117,9 @@
                     <table class="text-center" style="width:100%; margin-top: 0px; font-size: 11px;">
                       <colgroup span="1" style="width:10%; font-size:10px;" />
                       <thead>
+                        <t t-set="year" t-value="docs.current_year()"/>
+                        <t t-set="last_year" t-value="str(int(docs.current_year())-1)"/>
+                        <t t-log="year"/>
                         <tr>
     
                           <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Mes</th>
@@ -130,7 +133,7 @@
                       </thead>
                       <tbody>
                 <!-- DATOS DENTRO DEL BUCLE FOR POR MESES -->      
-                        <t t-foreach="lista_meses" t-as="meses">
+                        <!--t t-foreach="lista_meses" t-as="meses">
                           <t t-set="mes" t-value="meses"/>
                           <t t-set="totales_por_meses" t-value="docs.get_informes_por_tipo(meses)" />
                           <tr t-foreach="totales_por_meses" t-as="tipo_informe">
@@ -158,7 +161,84 @@
                               </td>
                             </t>
                           </tr>
-                        </t>
+                        </t-->
+
+                          <tr t-foreach='[("Septiembre","9",last_year),("Octubre","10",last_year),("Noviembre","11",last_year),("Diciembre","12",last_year),("Enero","1",year),("Febrero","2",year),("Marzo","3",year),("Abril","4",year),("Mayo","5",year),("Junio","6",year),("Julio","7",year),("Agosto","8",year),]' t-as="fila">
+                          <t t-set="totales_por_meses" t-value="docs.get_informes_por_tipo(fila[1],fila[2])" />
+                          <th  scope="row" class="text-center" style="height: 18px; border: 1px solid black;  border-collapse: ollapse; border-left: 0px;">
+                          <span t-out="fila[0]"/>
+                          </th>
+                            <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
+                              <t t-foreach="totales_por_meses" t-as="tipo_informe">
+                                <t t-if= "tipo_informe['tipo_informe'] == tipo[0]">
+                                  <span t-esc="tipo_informe['publicaciones']" />
+                                </t>
+                              </t>
+                            </td>
+                            <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
+                              <t t-foreach="totales_por_meses" t-as="tipo_informe">
+                                <t t-if= "tipo_informe['tipo_informe'] == tipo[0]">
+                                  <span t-esc="tipo_informe['videos']" />
+                                </t>
+                              </t>
+                            </td>
+                            <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
+                              <t t-foreach="totales_por_meses" t-as="tipo_informe">
+                                <t t-if= "tipo_informe['tipo_informe'] == tipo[0]">
+                                  <span t-esc="tipo_informe['horas']" />
+                                </t>
+                              </t>
+                            </td>
+                            <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
+                              <t t-foreach="totales_por_meses" t-as="tipo_informe">
+                                <t t-if= "tipo_informe['tipo_informe'] == tipo[0]">
+                                  <span t-esc="tipo_informe['revisitas']" />
+                                </t>
+                              </t>
+                            </td>
+                            <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
+                              <t t-foreach="totales_por_meses" t-as="tipo_informe">
+                                <t t-if= "tipo_informe['tipo_informe'] == tipo[0]">
+                                  <span t-esc="tipo_informe['cursos']" />
+                                </t>
+                              </t>
+                            </td>
+                            <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;border-right: 0px;">
+                              <t t-foreach="totales_por_meses" t-as="tipo_informe">
+                                <t t-if= "tipo_informe['tipo_informe'] == tipo[0]">
+                                  <span/>
+                                </t>
+                              </t>
+                            </td>
+                          
+                          </tr>
+                          <!--FILA TOTALES TODO:No funciona-->
+                      <tr>
+                      <th  scope="row" style="height: 18px; border: 1px solid black;  border-collapse: ollapse; border-left: 0px;">
+                          Totales:
+                        </th>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="sum(informe.publicaciones for tipo_informe in totales_por_meses)"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="sum(informe.videos for tipo_informe in totales_por_meses)"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="sum(informe.horas for tipo_informe in totales_por_meses)"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="sum(informe.revisitas for tipo_informe in totales_por_meses)"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="sum(informe.cursos for tipo_informe in totales_por_meses)"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;border-right: 0px;"></td>
+                        
+                      </tr>
+                      <!--FILA PROMEDIOS-->
+                      <tr>
+                      <th  scope="row" style="height: 18px; border: 1px solid black;  border-collapse: ollapse; border-left: 0px">
+                          Promedio:
+                        </th>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="round(sum(informe.publicaciones for tipo_informe in totales_por_meses) / 3, 2)"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="round(sum(informe.videos for tipo_informe in totales_por_meses) / 3, 2)"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="round(sum(informe.horas for tipo_informe in totales_por_meses) / 3, 2)"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="round(sum(informe.revisitas for tipo_informe in totales_por_meses) / 3, 2)"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="round(sum(informe.cursos for tipo_informe in totales_por_meses) / 3, 2)"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;border-right: 0px;"></td>
+                        
+                      </tr>
+
                       </tbody>
                       </table>
             </table>
