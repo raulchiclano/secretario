@@ -1228,20 +1228,11 @@
               <blockquote class="blockquote mb-0">
                 <p>Publicadores que no han informado este mes:</p>
                 <t t-set="irregulares" t-value="docs.get_publicadores_irregulares()" />
-                <t t-foreach="[1,2,3,4,5,6,7,8]" t-as="control">
                   <t t-foreach="irregulares" t-as="irregular">
-                    <t t-if="irregular.grupo[0]['name'] == control">
                       <p class="blockquote-footer">
-                        <span t-field="irregular.name" />
-                        [Grupo_
-                        <span t-esc="irregular.grupo[0]['name']" />
-                        ]
+                        <span t-field="irregular.nombre.name" />
                       </p>
-
-                    </t>
                   </t>
-                </t>
-
               </blockquote>
             </div>
           </t>
