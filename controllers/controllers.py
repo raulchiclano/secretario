@@ -116,7 +116,7 @@ class Pendientes (http.Controller):
         Publicadores_conInforme = http.request.env['secretary.publicadores'].search([('informe_id.fecha','=',fecha)])
         Publicadores_total = http.request.env['secretary.publicadores'].search([('activo', '=', 'TRUE')])
         Publicadores = Publicadores_total - Publicadores_conInforme
-        Mensaje = "Querido hermano, solo recordarte que todavía no hemos recibido tu informe. Por favor, envíalo a la mayor brevedad posible. ¡Muchas gracias!%0APicha aquí --> https://secretary.raulchiclano.es/enviarinforme"
+        Mensaje = "Querido hermano, solo recordarte que todavía no hemos recibido tu informe. Por favor, envíalo a la mayor brevedad posible. ¡Muchas gracias!%0APincha aquí --> https://secretary.raulchiclano.es/enviarinforme"
         for p in Publicadores.search([]):
             print(p.telefono, flush=True)
         

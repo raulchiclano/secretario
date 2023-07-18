@@ -61,7 +61,7 @@ class grupos(models.Model):
     _description = 'Grupos de Servicio'
 
     id = fields.Integer(string= 'Nombre', default=lambda self: self.env['ir.sequence'].next_by_code('increment_your_field'))
-    name = fields.Integer(string='Nombre', related="id")
+    name = fields.Integer(string='Nombre')
     responsable = fields.Many2one('secretary.publicadores', string="Superintendente de Grupo ")
     def name_get(self):
         result = []
@@ -239,7 +239,10 @@ class TotalesMensuales(models.TransientModel):
    # _auto = False
    # _rec_name = 'id'
 
-   
+    def total_de_grupos_existentes(self):
+        record_count = self.env['secretary.grupos'].search_count([])
+        return record_count
+    
     def _informe_sort(self):
         informes = self.env['secretary.informes'].search([])
         informes_sorted = informes.sorted(key= lambda i : i.fecha ,reverse=True)
@@ -322,7 +325,7 @@ class TotalesMensuales(models.TransientModel):
         grupos = self.env['secretary.grupos'].search([])
         menu_grupo = []
         for grupo in grupos:
-            menu_grupo.append((grupo.id, 'Grupo_'+ str(grupo.name)))
+            menu_grupo.append((grupo.name, 'Grupo_'+ str(grupo.name)))
         return menu_grupo
 
     grupo_seleccionado = fields.Selection(_grupo_sort, string = "Escoga grupo para generar informe", required = True)
@@ -331,6 +334,9 @@ class TotalesMensuales(models.TransientModel):
         return self.env.ref('secretary.action_totalesporGrupo_report').report_action(self)
 
 
+    def current_year(self):
+        year = date.today().year
+        return str(year)
          
     def get_publicadores_porgrupo(self):
         lista_porgrupos = self.env['secretary.publicadores'].search([('grupo','=',self.grupo_seleccionado),('activo','=','True'),])
