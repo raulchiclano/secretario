@@ -32,6 +32,7 @@
         'reports/totales_porgrupo.xml',
         'reports/totales_porprecursor.xml',
         'reports/registro_publicador.xml',
+        'reports/cartas.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

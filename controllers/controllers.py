@@ -62,10 +62,13 @@ class Panel(http.Controller):
         mes = Panel.calculoMesAInformar()[0]
         año = Panel.calculoMesAInformar()[1]
         año_default= str(date.today().year)
-        #print("valor de mes_anterior--------------------->",mes, flush=True)
+        horas = Panel.isCheck(post.get('tipo_informe'), post.get('check'), post.get('notas'), post.get('horas'))[0]
+        notas = Panel.isCheck(post.get('tipo_informe'), post.get('check'), post.get('notas'), post.get('horas'))[1]
+        ha_predicado = Panel.isCheck(post.get('tipo_informe'), post.get('check'), post.get('notas'), post.get('horas'))[2]
+        print("valor de check--------------------->",post.get('check'), flush=True)
         informes = http.request.env['secretary.informes'].sudo().create({
             'nombre': post.get('publicador'), 
-            'horas': post.get('horas'),
+            'horas': horas,
             'mes' : mes,
             'año' : año_default,
             'revisitas': post.get('revisitas'),
@@ -74,7 +77,8 @@ class Panel(http.Controller):
             'publicaciones' : post.get('publicaciones'),
             'tipo_informe' : post.get('tipo_informe'),
             'año' : año,
-            'notas' : post.get('notas'),
+            'notas' : notas,
+            'ha_predicado': ha_predicado,
             
         })
         vals = {
@@ -83,6 +87,22 @@ class Panel(http.Controller):
         #inherited the model to pass the values to the model from the form#
         return http.request.render("secretary.success", vals)
         #finally send a request to render the thank you page#
+
+    def isCheck(tipo, check, notas, horas):
+        resultado = horas
+        anotacion = notas
+        ha_predicado = True
+        if tipo == 'P':
+            if check == '1':
+                resultado = 0
+                anotacion = 'SI: Ha participado'
+            else:
+                resultado = 0
+                anotacion = 'NO: Es IRREGULAR'
+                ha_predicado = False
+        
+
+        return (resultado,anotacion,ha_predicado)
     
     def calculoMesAInformar():
         
@@ -117,19 +137,48 @@ class Pendientes (http.Controller):
         Publicadores_total = http.request.env['secretary.publicadores'].search([('activo', '=', 'TRUE')])
         Publicadores = Publicadores_total - Publicadores_conInforme
         Mensaje = "Querido hermano, solo recordarte que todavía no hemos recibido tu informe. Por favor, envíalo a la mayor brevedad posible. ¡Muchas gracias!%0APincha aquí --> https://secretary.raulchiclano.es/enviarinforme"
-        for p in Publicadores.search([]):
-            print(p.telefono, flush=True)
+        
         
         password = post.get('password'),
         if password[0] != '7757':
             return 'Contraseña incorrecta'
-        print("--------------------->>>>", password, flush=True)
         return http.request.render("secretary.pendiente", {
                 'grupos': Grupos.search([]),
                 'publicadores': Publicadores,
                 'mensaje' : Mensaje,
                 'publicadoresConInforme': Publicadores_conInforme,
                })
+    
+    @http.route('/solicitud', type='http', auth="public", website=True, csrf=False)
+    def solicitud_aux(self, **post):
+        fecha= '%s-%s' % (Panel.calculoMesAInformar()[0], Panel.calculoMesAInformar()[1])
+        publicadores = http.request.env['secretary.publicadores'].search([('activo', '=', 'TRUE')])
+        return http.request.render("secretary.solicitudaux", {
+                'publicadores': publicadores,
+               })
+    
+
+    @http.route(['/solicitud/entregada/'], type='http', auth="public", website=True)
+    def solicitud_form_submit(self, **post):
+        de_continiuo = Pendientes.isContinuo(post.get('checkContinuo'))
+        solicitud = http.request.env['secretary.solicitudesaux'].sudo().create({
+            'name': post.get('nombre'), 
+            'mes' : post.get('mes'),
+            'de_continiuo': de_continiuo,
+            
+        })
+        vals = {
+            'solicitud': solicitud,
+        }
+        #inherited the model to pass the values to the model from the form#
+        return http.request.render("secretary.success_aux", vals)
+        #finally send a request to render the thank you page#
+    
+    def isContinuo(check):
+        if check == 'true':
+            return True
+        else:
+            return False
 
 
 

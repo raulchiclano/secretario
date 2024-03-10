@@ -14,24 +14,34 @@
             <div class="oe_button_box" name="button_box">
               <button name="f_activo" type="object" class="oe_stat_button" string='Inactivo' icon='fa-toggle-off' attrs="{'invisible':[('activo','=',True),]}"/>
               <button name="f_activo" type="object" class="oe_stat_button" string='Activo' icon='fa-toggle-on' attrs="{'invisible':[('activo','=',False),]}"/>
+              <button name="f_voluntades" type="object" class="oe_stat_button" string='Sin Voluntades' icon='fa-toggle-off' attrs="{'invisible':[('voluntades','=',True),]}"/>
+              <button name="f_voluntades" type="object" class="oe_stat_button" string='Voluntades rellenadas' icon='fa-toggle-on' attrs="{'invisible':[('voluntades','=',False),]}"/>
+              <button name="f_consentimiento" type="object" class="oe_stat_button" string='Consentimiento no firmando' icon='fa-toggle-off' attrs="{'invisible':[('consentimiento','=',True),]}"/>
+              <button name="f_consentimiento" type="object" class="oe_stat_button" string='Consentimiento firmando' icon='fa-toggle-on' attrs="{'invisible':[('consentimiento','=',False),]}"/>
+              <button name="f_emergencia" type="object" class="oe_stat_button" string='Datos emergencia' icon='fa-toggle-off' attrs="{'invisible':[('datos_emergencia','=',True),]}"/>
+              <button name="f_emergencia" type="object" class="oe_stat_button" string='Datos emergencia' icon='fa-toggle-on' attrs="{'invisible':[('datos_emergencia','=',False),]}"/>
             </div>
-            <group name="group_top" string="DATOS DEL PUBLICADOR">
-              <group name="group_left">
-                <field name="name" />
+            <div>
+              <h2><field name="name" /></h2>
+            </div>
+            <group name="group_top">
+              <group name="group_left" string="DATOS DEL PUBLICADOR">
                 <field name="fecha_nacimiento" />
                 <field name="fecha_bautismo" />
                 <field name="telefono" widget="phone" />
                 <field name="email" widget="email" />
                 <field name="direccion" />
+                <field name="genero" widget="radio"/>
                 <field name="activo" invisible="1"/>
+                <field name="voluntades" invisible="1"/>
+                <field name="consentimiento" invisible="1"/>
+                <field name="datos_emergencia" invisible="1"/>
               </group>
-              <group name="group_right" string="">
-                <field name="genero" widget="radio" />
+              <group name="group_right" string="DATOS DE CONGREGACIÓN">
                 <field name="tipo" widget="radio" />
                 <field name="grupo"/>
                 <field name="nombramiento" widget="radio"/>
                 <field name="pdf" widget="binary" filename="s-21.pdf" string="S-21 Antiguo"/>
-                <field name="activo" widget="boolean_toggle"/>
               </group>
               
             </group>
@@ -191,6 +201,134 @@
 
 
 
+
+
+
+
+
+
+
+
+    <!--MODELO SOLICITUDES-AUX -->
+
+                      <!--VISTA FORM  -->
+
+    <record id="view_secretary_solicitud_auxiliar_form" model="ir.ui.view">
+      <field name="name">view.secretary.solicitudauxiliar.form </field>
+      <field name="model">secretary.solicitudesaux</field>
+      <field name="arch" type="xml">
+       <form string="Solicitudes">
+            <sheet>
+              <div>
+                <h2><field name="publicador" /></h2>
+              </div>
+              <group name="group_top">
+                <group name="group_left" string="Firma">
+                  <field name="name"></field>  
+                  <field name="fecha"></field>  
+                  <field name="de_continiuo"></field>  
+                </group>
+                <group name="group_right" string="Fecha">
+                  <field name="mes"></field>
+                  <field name="año"></field>
+                  <field name="aprobada"></field>
+                  
+                </group>
+              </group>
+              
+              <group name="group_bottom" string="Firmas miembros del Comité de servicio">
+                  
+                
+
+               <field name="firmaCord" invisible="1"></field>
+               <field name="firmaServ" invisible="1"></field>
+               <field name="firmaSecr" invisible="1"></field>
+              </group>
+            <footer class="footer-firmas">
+              <button name="f_cordinador" type="object" class="oe_stat_button btn-firmar" string='Firma Coordinador' icon='fa-toggle-off' attrs="{'invisible':[('firmaCord','=',True),]}" widget="bootstrap"/> 
+              <button name="f_cordinador" type="object" class="oe_stat_button btn-firmar" string='Firma Coordinador' icon='fa-toggle-on' attrs="{'invisible':[('firmaCord','=',False),]}" widget="bootstrap"/> 
+              <button name="f_servicio" type="object" class="oe_stat_button btn-firmar" string='Firma Ste. Servicio' icon='fa-toggle-off' attrs="{'invisible':[('firmaServ','=',True),]}"/> 
+              <button name="f_servicio" type="object" class="oe_stat_button btn-firmar" string='Firma Ste. Servicio' icon='fa-toggle-on' attrs="{'invisible':[('firmaServ','=',False),]}"/> 
+              <button name="f_secretario" type="object" class="oe_stat_button btn-firmar" string='Firma Secretario' icon='fa-toggle-off' attrs="{'invisible':[('firmaSecr','=',True),]}"/> 
+              <button name="f_secretario" type="object" class="oe_stat_button btn-firmar" string='Firma Secretario' icon='fa-toggle-on' attrs="{'invisible':[('firmaSecr','=',False),]}"/> 
+            </footer>
+            </sheet>
+          </form>
+      </field>
+    </record>
+    
+                      <!--VISTA KANBAN  -->
+
+    
+    <record id="view_secretary_solicitud_auxiliar_kanban" model="ir.ui.view">
+      <field name="name">view.secretary.solicitudauxiliar.kanban </field>
+      <field name="model">secretary.solicitudesaux</field>
+      <field name="arch" type="xml">
+        <kanban class="o_secretary_solicitud_auxiliar_kanban">
+          <field name="id"/>
+          <field name="name"/>
+          <field name="firmaCord"/>
+          <field name="firmaServ"/>
+          <field name="firmaSecr"/>
+
+          <templates>
+            <t t-name="kanban-box">
+              <div t-attf-class="oe_kanban_global_click kanban-solicitud rounded-lg" t-if="!record.firmaSecr.raw_value or !record.firmaServ.raw_value or !record.firmaCord.raw_value">
+                <div class="oe_kanban_details">
+                  <h3 class="text-center text-cool">
+                    Solicitud S-205b (Prec. Auxiliar)
+                  </h3>    
+                  <h5 class="text-center">
+                    Solicitante: <field name="name"/>
+                  </h5>     
+                  <h6 class="text-cool text-center">
+                    <field name="fecha"/>
+                  </h6>                       
+                </div>
+                
+              </div>
+              <div t-attf-class="oe_kanban_global_click kanban-aprobada rounded-lg" t-if="record.firmaSecr.raw_value and record.firmaServ.raw_value and record.firmaCord.raw_value">
+                <div class="oe_kanban_details">
+                  <h3 class="text-center text-cool">
+                    Solicitud S-205b (Prec. Auxiliar)
+                  </h3>    
+                  <h5 class="text-center">
+                    Solicitante: <field name="name"/>
+                  </h5>     
+                  <h6 class="text-cool text-center">
+                    <field name="fecha"/>
+                  </h6>                       
+                </div>
+                
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <record id="secretary_solicitud_auxiliar_action" model="ir.actions.act_window">
+      <field name="name">Estado Solicitudes S205b (Prec. Auxiliar) </field>
+      <field name="res_model">secretary.solicitudesaux</field>
+      <field name="view_mode">kanban,tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Todo listo por aquí        
+        </p>
+        <p>
+          No hay solicitudes pendientes
+        </p>
+
+      </field>
+    </record>
+
+
+
+
+
+
+
+
     <!--MODELO INFORMES -->
                       <!--VISTA FORM  -->
 
@@ -201,7 +339,8 @@
         <form string="Informes de predicación">
           <sheet>
             <div class="oe_button_box" name="button_box">
-              <button name="este_mes_aux_activo" type="object" class="oe_stat_button" string='Aux.30/50h' icon='fa-check-square-o'/>
+              <button name="f_ha_predicado" type="object" class="oe_stat_button" string='¿Ha predicado?' icon='fa-check-square-o' attrs="{'invisible':[('ha_predicado','=',False),]}"/>
+              <button name="f_ha_predicado" type="object" class="oe_stat_button" style="background-color:#ff8888; color: #222222; font-weight:600" string='No ha predicado' icon='fa-exclamation' attrs="{'invisible':[('ha_predicado','=',True),]}"/>
             </div>
             <group name="group_top" string="NOMBRE DEL PUBLICADOR">
               <field name="nombre" widget="selection" class="form-row"/>
@@ -211,6 +350,7 @@
                 <field name="horas" />
                 <field name="revisitas" />
                 <field name="publicaciones" />
+                <field name="ha_predicado" invisible="1"/>
               </group>
               <group name="group_right" string=' '>
                 <field name="año" />
@@ -234,7 +374,10 @@
       <field name="name">Informes de predicación</field>
       <field name="res_model">secretary.informes</field>
       <field name="view_mode">kanban,tree,form,graph,calendar</field>      
-      <field name="context">{"search_default_groupby_mes":1, "search_default_filterby_año":1}</field>
+      <field name="context">{"search_default_groupby_mes":1, "search_default_filterby_mes":1}</field>
+      <!--field name="context">{"group_by": "create_date"}</field-->
+
+
       <field name="help" type="html">
         <h3 class="oe_view_nocontent_create">
           INFORMES        
@@ -279,81 +422,159 @@
           <field name="publicaciones"/>
           <field name="revisitas"/>
           <field name="videos"/>
+          <field name="ha_predicado"/>
           <field name="cursos"/>
           <templates>
-            <t t-name="kanban-box">
-              <div t-attf-class="oe_kanban_global_click rounded-lg kanban-publicadores">
-                <div class="oe_kanban_details">
-                  <h3 class="text-cool">
-                    <field name="nombre" />
-                  </h3>                                
-                  <div class="o_kanban_inline_block" t-if="record.horas.value">
-                    <i id='icon-horas' class="fa fa-tachometer" role="img" aria-label="Horas del informe" />
-                    <strong>
-                      <field name="horas" widget="statinfo"
-                      string="Horas"
-                      icon="fa-calendar"
-                      options="{'label_field': 'label_tasks'}" /> 
-                    </strong>
-                  </div>
-                  <div style="margin-left: 20px" class="o_kanban_inline_block" t-if="record.publicaciones.value">
-                    <i id='icon-publicaciones' class="fa fa-files-o" role="img" aria-label="Horas del informe" />
-                    <strong>
-                      <field name="publicaciones" widget="statinfo"
-                      string="Publicaciones"
-                      icon="fa-files-o"
-                      help="Publicaciones"
-                      options="{'label_field': 'label_tasks'}" /> 
-                    </strong>
-                  </div>
-                  <div class="o_kanban_inline_block" t-if="record.revisitas.value">
-                    <i id='icon-revisitas' class="fa fa-repeat" role="img" aria-label="Revisitas del informe" />
-                    <strong>
-                      <field name="revisitas" widget="statinfo"
-                      string="Revisitas"
-                      icon="fa-calendar"
-                      options="{'label_field': 'label_tasks'}" /> 
-                    </strong>
-                  </div>
-                  <div style="margin-left: 20px" class="o_kanban_inline_block" t-if="record.videos.value">
-                    <i id='icon-videos' class="fa fa-youtube-play" role="img" aria-label="Videos del informe" />
-                    <strong>
-                      <field name="videos" widget="statinfo"
-                      string="Videos"
-                      icon="fa-calendar"
-                      options="{'label_field': 'label_tasks'}" /> 
-                    </strong>
-                  </div>
-                  <div t-if="record.cursos.value">
-                    <i id='icon-cursos' class="fa fa-suitcase" role="img" aria-label="Cursos del informe" />
-                    <strong>
-                      <field name="cursos" widget="statinfo"
-                      string="Cursos"
-                      icon="fa-calendar"
-                      options="{'label_field': 'label_tasks'}" /> 
-                    </strong>
+            <t t-name="kanban-box" >
+                <div  t-attf-class="oe_kanban_global_click rounded-lg kanban-publicadores" t-if="record.ha_predicado.raw_value">
+
+                  <div class="oe_kanban_details">
+                    <h3 class="text-cool">
+                      <field name="nombre" />
+                    </h3>                                
+                    <div class="o_kanban_inline_block" t-if="record.horas.value">
+                      <i id='icon-horas' class="fa fa-tachometer" role="img" aria-label="Horas del informe" />
+                      <strong>
+                        <field name="horas" widget="statinfo"
+                        string="Horas"
+                        icon="fa-calendar"
+                        options="{'label_field': 'label_tasks'}" /> 
+                      </strong>
+                    </div>
+                    <div style="margin-left: 20px" class="o_kanban_inline_block" t-if="record.publicaciones.value">
+                      <i id='icon-publicaciones' class="fa fa-files-o" role="img" aria-label="Horas del informe" />
+                      <strong>
+                        <field name="publicaciones" widget="statinfo"
+                        string="Publicaciones"
+                        icon="fa-files-o"
+                        help="Publicaciones"
+                        options="{'label_field': 'label_tasks'}" /> 
+                      </strong>
+                    </div>
+                    <div class="o_kanban_inline_block" t-if="record.revisitas.value">
+                      <i id='icon-revisitas' class="fa fa-repeat" role="img" aria-label="Revisitas del informe" />
+                      <strong>
+                        <field name="revisitas" widget="statinfo"
+                        string="Revisitas"
+                        icon="fa-calendar"
+                        options="{'label_field': 'label_tasks'}" /> 
+                      </strong>
+                    </div>
+                    <div style="margin-left: 20px" class="o_kanban_inline_block" t-if="record.videos.value">
+                      <i id='icon-videos' class="fa fa-youtube-play" role="img" aria-label="Videos del informe" />
+                      <strong>
+                        <field name="videos" widget="statinfo"
+                        string="Videos"
+                        icon="fa-calendar"
+                        options="{'label_field': 'label_tasks'}" /> 
+                      </strong>
+                    </div>
+                    <div t-if="record.cursos.value">
+                      <i id='icon-cursos' class="fa fa-suitcase" role="img" aria-label="Cursos del informe" />
+                      <strong>
+                        <field name="cursos" widget="statinfo"
+                        string="Cursos"
+                        icon="fa-calendar"
+                        options="{'label_field': 'label_tasks'}" /> 
+                      </strong>
+                    </div>
+                    
                   </div>
                   
                 </div>
-                
-              </div>
+                <div  t-attf-class="oe_kanban_global_click rounded-lg kanban-irregular" t-if="!record.ha_predicado.raw_value">
+
+                  <div class="oe_kanban_details">
+                    <h3 class="text-cool">
+                      <field name="nombre" />
+                    </h3>                                
+                    <div class="o_kanban_inline_block" t-if="record.horas.value">
+                      <i id='icon-horas' class="fa fa-tachometer" role="img" aria-label="Horas del informe" />
+                      <strong>
+                        <field name="horas" widget="statinfo"
+                        string="Horas"
+                        icon="fa-calendar"
+                        options="{'label_field': 'label_tasks'}" /> 
+                      </strong>
+                    </div>
+                    <div style="margin-left: 20px" class="o_kanban_inline_block" t-if="record.publicaciones.value">
+                      <i id='icon-publicaciones' class="fa fa-files-o" role="img" aria-label="Horas del informe" />
+                      <strong>
+                        <field name="publicaciones" widget="statinfo"
+                        string="Publicaciones"
+                        icon="fa-files-o"
+                        help="Publicaciones"
+                        options="{'label_field': 'label_tasks'}" /> 
+                      </strong>
+                    </div>
+                    <div class="o_kanban_inline_block" t-if="record.revisitas.value">
+                      <i id='icon-revisitas' class="fa fa-repeat" role="img" aria-label="Revisitas del informe" />
+                      <strong>
+                        <field name="revisitas" widget="statinfo"
+                        string="Revisitas"
+                        icon="fa-calendar"
+                        options="{'label_field': 'label_tasks'}" /> 
+                      </strong>
+                    </div>
+                    <div style="margin-left: 20px" class="o_kanban_inline_block" t-if="record.videos.value">
+                      <i id='icon-videos' class="fa fa-youtube-play" role="img" aria-label="Videos del informe" />
+                      <strong>
+                        <field name="videos" widget="statinfo"
+                        string="Videos"
+                        icon="fa-calendar"
+                        options="{'label_field': 'label_tasks'}" /> 
+                      </strong>
+                    </div>
+                    <div t-if="record.cursos.value">
+                      <i id='icon-cursos' class="fa fa-suitcase" role="img" aria-label="Cursos del informe" />
+                      <strong>
+                        <field name="cursos" widget="statinfo"
+                        string="Cursos"
+                        icon="fa-calendar"
+                        options="{'label_field': 'label_tasks'}" /> 
+                      </strong>
+                    </div>
+                    
+                  </div>
+                  
+                </div>
             </t>
           </templates>
         </kanban>
       </field>
     </record>
-
+    
+    
     <record id="secretary_informes_view_search" model="ir.ui.view">
       <field name="name">secretary.informes.view.search</field>
       <field name="model">secretary.informes</field>
+
       <field name="arch" type="xml">
         <search string="Filtrar Informes">
-          <field name="fecha" />
+          <field name="fecha"/>
+
           <group expand="1" string="Agrupar por...">
-            <filter name="groupby_mes" string="Agrupados por mes" domain="[]" context="{'group_by': 'fecha'}" />
+            <filter name="groupby_mes" string="Agrupados por tipo" domain="[]" context="{'group_by': 'tipo_informe'}" />
           </group>
-          <filter name="filterby_año" string="Año actual" domain="[('año', '=', '2023')]" />
-        
+          <filter name="filterby_año" string="Año actual" domain="[('año', '=', (context_today()).strftime('%Y'))]"/>
+          <filter name="filterby_mes" string="Este mes" domain="[('create_date', '&gt;=', (context_today() + relativedelta(day=1)).strftime('%Y-%m-%d 00:00:00')), ('create_date', '&lt;', (context_today() + relativedelta(months=1, day=1)).strftime('%Y-%m-%d 00:00:00'))]"/>
+          <filter name="filterby_aux" string="Solo P. Auxiliares" domain="[
+              ('create_date', '&gt;=', (context_today() + relativedelta(day=1)).strftime('%Y-%m-%d 00:00:00')), ('create_date', '&lt;', (context_today() + relativedelta(months=1, day=1)).strftime('%Y-%m-%d 00:00:00')),
+              ('tipo_informe', '=', 'A')]"/>
+          <filter name="filterby_reg" string="Solo P. Regulares" domain="[
+              ('create_date', '&gt;=', (context_today() + relativedelta(day=1)).strftime('%Y-%m-%d 00:00:00')), ('create_date', '&lt;', (context_today() + relativedelta(months=1, day=1)).strftime('%Y-%m-%d 00:00:00')),
+              ('tipo_informe', '=', 'R')]"/>
+          <filter name="filterby_pul" string="Solo Publicadores" domain="[
+              ('create_date', '&gt;=', (context_today() + relativedelta(day=1)).strftime('%Y-%m-%d 00:00:00')), ('create_date', '&lt;', (context_today() + relativedelta(months=1, day=1)).strftime('%Y-%m-%d 00:00:00')),
+              ('tipo_informe', '=', 'P')]"/> 
+          <filter name="filterby_pul" string="Irregulares este mes" domain="[
+              ('create_date', '&gt;=', (context_today() + relativedelta(day=1)).strftime('%Y-%m-%d 00:00:00')), ('create_date', '&lt;', (context_today() + relativedelta(months=1, day=1)).strftime('%Y-%m-%d 00:00:00')),
+              ('ha_predicado', '=', False)]"/>    
+
+          <!-- *** Solo para Diciembre ***-->
+          <!--filter name="filterby_año" string="Año y Mes actuales" domain="[('año', '=', '2023'),('mes', '=', (context_today() + relativedelta(months=-1)).strftime('%m'))]"/-->
+          <!-- ********** -->
+
         </search>
       </field>
     </record>
@@ -389,13 +610,13 @@
       <field name="name">Formularios de Registro de publicador de la congregación</field>
       <field name="model">secretary.registro_publicador_report</field>
       <field name="arch" type="xml">
-        <form string="Selecione año a generar">
+        <form string="Seleccione año a generar">
           <group>
             <field name="año_servicio"/>
           </group>
           <footer>
-            <button name="print_report_formularios_registro_publicador" string="Generar S-21" class="oe_right oe_highlight" type="object"/>
-            <button special="cancel" string="Cancelar" class="oe_right oe_highlight"/>
+            <button name="print_report_formularios_registro_publicador" string="Generar S-21" class="oe_right btn-primary" type="object"/>
+            <button special="cancel" string="Cancelar" class="button btn btn-secondary"/>
             <!--button name="test" string="Test" class="oe_right oe_highlight" type="object"/-->
 
           </footer>
@@ -405,7 +626,7 @@
 
     <!-- Vista Actions-->
     <record id="secretary_registro_publicadores_wizard" model="ir.actions.act_window">
-      <field name="name">Formularios de Registro de publicador de la congregación separados por tipo</field>
+      <field name="name">Formularios de Registro totales sumados de regulares, auxiliares y publicadores</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">secretary.registro_publicador_report</field>
       <field name="view_id" ref="wizard_registro_publicadores_view"/>
@@ -426,8 +647,7 @@
           </group>
           <footer>
             <button name="print_report_totales_mensuales" string="Imprimir" class="oe_right oe_highlight" type="object"/>
-            <button name="get_publicadores_irregulares" string="Test" class="oe_right oe_highlight" type="object"/>
-            <button special="cancel" string="Cancelar" class="oe_right oe_highlight"/>
+            <button special="cancel" string="Cancelar" class="button btn btn-secondary"/>
           </footer>
         </form>
       </field>
@@ -435,7 +655,7 @@
 
     <!-- Vista Actions-->
     <record id="secretary_totales_mensuales_wizard" model="ir.actions.act_window">
-      <field name="name">Totales Mensuales</field>
+      <field name="name">Resumen mensual</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">secretary.totales_mensuales_report</field>
       <field name="view_id" ref="wizard_totales_mensuales_view"/>
@@ -445,7 +665,7 @@
 
 
 
-    <!--MODELO TOTALES POR GRUPOS -->
+    <!--MODELO REPORTES POR GRUPOS -->
 
     <!-- Vista Form-->
     <record id="wizard_totales_porgrupo_view" model="ir.ui.view">
@@ -457,9 +677,10 @@
             <field name="grupo_seleccionado" />
           </group>
           <footer>
-            <button name="print_report_totales_porgrupo" string="Imprimir" class="oe_right oe_highlight" type="object"/>
-            <button name="get_publicadores_porgrupo" string="Test" class="oe_right oe_highlight" type="object"/>
-            <button special="cancel" string="Cancelar" class="oe_right oe_highlight"/>
+            <button name="print_report_totales_porgrupo" string="Tarjetas S-21" class="oe_right oe_highlight" type="object"/>
+            <button name="print_datosEmergencia_totales_porgrupo" string="Datos de contacto" class="oe_right btn-danger" type="object"/>
+            <button name="print_consentimiento_totales_porgrupo" string="Consentimiento" class="oe_right btn-danger" type="object"/>
+            <button special="cancel" string="Cancelar" class="button btn btn-secondary"/>
           </footer>
         </form>
       </field>
@@ -467,7 +688,7 @@
 
     <!-- Vista Actions-->
     <record id="secretary_totales_porgrupo_wizard" model="ir.actions.act_window">
-      <field name="name">Totales por grupo</field>
+      <field name="name">Reportes por grupo</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">secretary.totales_porgrupo_report</field>
       <field name="view_id" ref="wizard_totales_porgrupo_view"/>
@@ -476,7 +697,7 @@
     </record>
 
 
-    <!--MODELO TOTALES POR PRECURSORES -->
+    <!--MODELO S-21 POR TIPO PUBLICADOR (PRECURSORES, AUX. O PUBLICAODOR NORMAL) -->
 
     <!-- Vista Form-->
     <record id="wizard_totales_porprecursor_view" model="ir.ui.view">
@@ -488,9 +709,9 @@
             <field name="tipo_precursor"/>
           </group>
           <footer>
-            <button name="print_report_totales_porprecursor" string="Imprimir" class="oe_right oe_highlight" type="object"/>
+            <button name="print_report_totales_porprecursor" string="Generar tarjetas S-21" class="oe_right oe_highlight" type="object"/>
             <!--button name="get_publicadores_porgrupo" string="Test" class="oe_right oe_highlight" type="object"/-->
-            <button special="cancel" string="Cancelar" class="oe_right oe_highlight"/>
+            <button special="cancel" string="Cancelar" class="button btn btn-secondary"/>
           </footer>
         </form>
       </field>
@@ -498,10 +719,47 @@
 
     <!-- Vista Actions-->
     <record id="secretary_totales_porprecusor_wizard" model="ir.actions.act_window">
-      <field name="name">Totales por precursor</field>
+      <field name="name">Tarjetas S-21 por tipo de publicador</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">secretary.totales_porprecursores_report</field>
       <field name="view_id" ref="wizard_totales_porprecursor_view"/>
+      <field name="view_mode">form</field>      
+      <field name="target">new</field>
+    </record>
+
+
+     <!-- MODELO SECRETARIO > CARTAS -->
+
+    <!-- Vista Form-->
+    <record id="wizard_cartas_view" model="ir.ui.view">
+      <field name="name">Generar cartas de la congregación</field>
+      <field name="model">secretary.cartas_report</field>
+      <field name="arch" type="xml">
+        <form string="Generar carta">
+          <group>
+            <field name="remitente" widget="radio"></field>
+            <field name="destinatario"/>
+            <field name="asunto"/>
+            <field name="mensaje" widget="html" class="oe_form_field_html form-control load_editor" style="height: 250px;" options="{'widget': 'html', 'extra_classes': 'load_editor'}"/>
+
+
+          </group>
+          <footer>
+            <button name="print_report_cartas" string="Generar" class="oe_right oe_highlight" type="object"/>
+            <button name="save_content" string="Guardar" class="oe_right oe_highlight" type="object"/>
+            <!--button name="get_publicadores_porgrupo" string="Test" class="oe_right oe_highlight" type="object"/-->
+            <button special="cancel" string="Cancelar" class="button btn btn-secondary"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <!-- Vista Actions-->
+    <record id="secretary_cartas_wizard" model="ir.actions.act_window">
+      <field name="name">Generador de cartas</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">secretary.cartas_report</field>
+      <field name="view_id" ref="wizard_cartas_view"/>
       <field name="view_mode">form</field>      
       <field name="target">new</field>
     </record>
@@ -536,35 +794,58 @@
 
     <menuitem
     id="menu_secretary_totales"
-    name="Totales"
+    name="Reportes"
     parent="menu_secretary_root"
     sequence="0"/>
 
     <menuitem
     id="menu_secretary_registro_publicador"
-    name="Generar S-21 por tipo Regular, auxiliar y publicador"
+    name="Generar totales sumados por regular, auxiliar y publicador"
     parent="menu_secretary_totales"
     action="secretary_registro_publicadores_wizard"
     sequence="0"/>
     <menuitem
     id="menu_secretary_totales_mensuales"
-    name="Totales mensuales"
+    name="Resumen mensual"
     action="secretary_totales_mensuales_wizard"     
     parent="menu_secretary_totales"
     sequence="0"/>
     <menuitem
     id="menu_secretary_totales_porgrupo"
-    name="Totales por grupo"
+    name="Reportes por grupos"
     action="secretary_totales_porgrupo_wizard"     
     parent="menu_secretary_totales"
     sequence="0"/>
     <menuitem
     id="menu_secretary_totales_porprecursor"
-    name="Totales por Precursor"
+    name="Generar S-21 por tipo publicador"
     action="secretary_totales_porprecusor_wizard"     
     parent="menu_secretary_totales"
     sequence="0"/>
 
+    <menuitem
+    id="menu_secretary_secretario"
+    name="Secretario"
+    parent="menu_secretary_root"
+    sequence="0"/>
+    <menuitem
+    id="menu_secretary_secretario_cartas"
+    name="Cartas"
+    action="secretary_cartas_wizard"     
+    parent="menu_secretary_secretario"
+    sequence="0"/>
+
+    <menuitem
+    id="menu_secretary_solicitudes"
+    name="Solicitudes"
+    parent="menu_secretary_root"
+    sequence="0"/>
+    <menuitem
+    id="menu_secretary_solicitud_auxiliar"
+    name="S-205b (Prec. Auxiliar)"
+    action="secretary_solicitud_auxiliar_action"     
+    parent="menu_secretary_solicitudes"
+    sequence="0"/>
 
 
   </data>

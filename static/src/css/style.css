@@ -1,4 +1,9 @@
 /* CSS global*/
+
+.texto-serif {
+    font-family: 'Times New Roman', serif;
+}
+
 .text-cool{
     color: #1E2838 !important;
     font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
@@ -14,18 +19,46 @@
 
 }
 .o_main_navbar{
-    background-color: #17929f !important;
-    border-color: #17929f !important;
+/*    background-color: #17929f !important;*/
+    background-color: #00b0ac !important;
+    border-color: #00b0ac !important;
 }
 
-.o_menu_systray::before{
-    background-color: #17929f !important;
-    border-color: #17929f !important;
+.o_menu_systray{
+    background-color: #373433 !important;
+    border-color: #373433 !important;
+}
+.o_menu_sections {
+  background-color: #373433 !important;
 }
 
 .btn-primary{
     background-color: #9E2667 !important;
-    border-color: #9E2667 !important;
+    background-color: #00687d !important;
+    border-color: #00687d !important;
+}
+.btn-primary:hover{
+  background-color: #0093b0 !important;
+  border-color: #0093b0 !important;
+}
+.btn-primary:active, .btn-primary:focus{
+  background-color: #0093b0 !important;
+  box-shadow: none !important;
+  border-color: #0093b0 !important;
+}
+
+.btn.btn-danger {
+  background-color: #526265 !important;
+  border-color: #526265 !important;
+}
+.btn-danger:hover {
+  background-color: #5b6c6f !important;
+  border-color: #5b6c6f !important;
+}
+.btn-danger:active, .btn-danger:focus {
+  background-color: #5b6c6f !important;
+  border-color: #5b6c6f !important;
+  box-shadow: none !important;
 }
 
 /*CSS del modelo PUBLICADORES*/
@@ -84,3 +117,95 @@ btn-outline-primary .btn-informe-publicador:active :hover {
     background-color: #107E8B !important;
   }
 
+  /* CSS del modelo INFORMES*/
+.kanban-irregular{
+    background-color: rgba(158, 38, 38, 0.125) !important;
+    border-color: rgba(158, 38, 38, 0.125) !important;
+    margin-bottom: 5px !important;
+    width: 230px !important;
+}
+  /* CSS del modelo Solicitudues Aux*/
+  .kanban-aprobada.rounded-lg {
+    border:1px solid #9ace8d;
+    opacity: 1;
+    background-color:#edffe9;
+  }
+.kanban-aprobada h3.text-center.text-cool::before {
+  content: '✓';
+  color:#1f8639;
+  font-size: 24px;
+}
+.kanban-aprobada *{
+    color: #324250;
+  }
+
+
+.kanban-solicitud.rounded-lg{
+    border:2px solid #F5F5F5;
+    opacity: 1;
+    padding-top: 15px;
+  }
+
+.kanban-solicitud h3{
+    color: #7c8088;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase; 
+  }
+.kanban-solicitud h6 span{
+    color: #356ab1;
+    font-weight: 700;
+    font-size: 16px;
+    
+    
+  }
+.kanban-solicitud h5{
+    color: #444;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  /*************************/
+
+  .notas, .notas li{
+    font-size:12px !important;
+    font-family: Roboto !important;
+    text-align: left !important;
+    font-weight: 900 !important;
+  }
+  .aux-form{
+    background-color: white !important;
+    border-radius: 12px !important;
+    box-shadow: rgba(17, 24, 39, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px !important;
+    margin: 20px 5px !important;
+    padding: 15px !important;
+  }
+  .notas-pie{
+    font-size:14px !important;
+    font-family: Roboto !important;
+    text-align: left !important;
+    font-weight: 300;
+  }
+
+  .footer-firmas{
+    display:flex;
+    flex-direction: rows;
+    justify-content: space-evenly;
+  }
+  .btn-firmar span{
+    color: #212121;
+    font-weight: 500;
+    font-size: 18px;
+  }
+  .btn-firmar i.fa-toggle-off{
+    color: #aaaaaa;
+    font-size: 24px;
+    margin-right: 10px;
+  }
+  .btn-firmar i.fa-toggle-on{
+    color: #17929f;
+    font-size: 24px;
+    margin-right: 10px;
+  }
+  
+  
