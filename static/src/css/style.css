@@ -208,4 +208,55 @@ btn-outline-primary .btn-informe-publicador:active :hover {
     margin-right: 10px;
   }
   
-  
+  /* Estilos para dispositivos móviles */
+@media only screen and (max-width: 768px) {
+  /* Aquí van tus estilos específicos para dispositivos móviles */
+  .o_kanban_view{
+    display: flex !important;
+    flex-direction: column !important;
+  }
+    /*La columna*/
+  .o_kanban_group.ui-sortable, .o_secretary_grupos_kanban{
+    min-width: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    }
+    /*Las cajas*/
+  .o_kanban_view .o_kanban_group .o_kanban_record{
+    width: 50% !important;
+  }
+  /*El titulo*/
+  .o_kanban_view .o_kanban_group .o_kanban_header{
+    width: 100% !important;
+  }
+  .o_kanban_view .o_kanban_group .o_kanban_header .o_kanban_header_title span{
+    font-size: 18px !important;
+    font-weight: 600 !important;
+  }
+  /**************************/
+  .o_menu_systray div:not(.o_user_menu) {
+  display: none !important; 
+  }
+  span.oe_topbar_name{
+  display: none !important; 
+  }
+  nav .o_navbar_apps_menu{
+    max-width: 10vw !important;
+  }
+
+  ol.breadcrumb, .o_searchview {
+    min-width: 45vw !important;
+  }
+  header nav.o_main_navbar div.o_menu_sections {
+    display: flex !important;
+    min-width: 70vw !important;
+  }
+
+  div.oe_kanban_global_click.kanban-grupos.rounded-lg.o_kanban_record {
+    margin-right: 5% !important;
+    margin-left: 5% !important;
+    margin-top: 5% !important;
+    max-width: 90% !important;
+  }
+
+}
