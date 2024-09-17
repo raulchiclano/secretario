@@ -43,7 +43,6 @@
                 <field name="nombramiento" widget="radio"/>
                 <field name="pdf" widget="binary" filename="s-21.pdf" string="S-21 Antiguo"/>
               </group>
-              
             </group>
             <notebook>
               <page string="INFORMES">
@@ -51,12 +50,28 @@
                   <tree>
                     <field name="fecha"/>
                     <field name="horas"/>
-                    <field name="revisitas"/>
-                    <field name="publicaciones"/>
-                    <field name="videos"/>
                     <field name="cursos"/>
+                    <field name="ha_predicado"/>
                   </tree>
                 </field>
+              </page>
+              <page string="DATOS DE EMERGENCIA">
+                <group name="group_top">
+                  <group name="group_left" string="MISMA LOCALIDAD">
+                    <field name="de_local_tf" widget="phone"/>
+                    <field name="de_local_tf_fijo" widget="phone"/>
+                    <field name="de_local_esTestigo"/>
+                    <field name="de_local_consentimiento"/>
+                    <field name="de_local_notas" />
+                  </group>
+                  <group name="group_right" string="OTRA CIUDAD">
+                    <field name="de_fuera_tf" widget="phone"/>
+                    <field name="de_fuera_tf_fijo" widget="phone"/>
+                    <field name="de_fuera_esTestigo"/>
+                    <field name="de_fuera_consentimiento"/>
+                    <field name="de_fuera_notas" />
+                  </group>
+                </group>
               </page>
             </notebook>
           </sheet>
@@ -73,9 +88,18 @@
           <field name="name" />
           <field name="direccion" />
           <field name="telefono" />
-          <field name="fecha_nacimiento" />
-          <field name="fecha_bautismo" />
           <field name="email" />
+          <field name="datos_emergencia" />
+          <field name="de_local_tf" widget="phone"/>
+          <field name="de_local_tf_fijo" widget="phone"/>
+          <field name="de_local_esTestigo"/>
+          <field name="de_local_consentimiento"/>
+          <field name="de_local_notas" />
+          <field name="de_fuera_tf" widget="phone"/>
+          <field name="de_fuera_tf_fijo" widget="phone"/>
+          <field name="de_fuera_esTestigo"/>
+          <field name="de_fuera_consentimiento"/>
+          <field name="de_fuera_notas" />
         </tree>
       </field>
     </record>

@@ -48,6 +48,20 @@ class publicadores(models.Model):
      datos_emergencia = fields.Boolean(string='Datos emergencia ', default='False', readonly=True)
      consentimiento = fields.Boolean(string='Consentimiento de datos', default='False', readonly=True)
      informe_id = fields.One2many("secretary.informes", "nombre", string="Mis Informes")
+     
+     #DATOS EMERGENCIA:
+     de_local_tf = fields.Char(string= "Teléfono móvil")
+     de_local_tf_fijo = fields.Char(string= "Teléfono fijo")
+     de_local_esTestigo = fields.Boolean(string= "¿Es Testigo?", default=False)
+     de_local_consentimiento = fields.Boolean(string= " Ha dado consentimiento verbal o escrito", default=False)
+     de_local_notas = fields.Char(string= "Comentario adicional")
+
+     de_fuera_tf = fields.Char(string= "Teléfono móvil")
+     de_fuera_tf_fijo = fields.Char(string= "Teléfono fijo")
+     de_fuera_esTestigo = fields.Boolean(string= "¿Es Testigo?", default=False)
+     de_fuera_consentimiento = fields.Boolean(string= " Ha dado consentimiento verbal o escrito", default=False)
+     de_fuera_notas = fields.Char(string= "Comentario adicional")
+
 
 
 
