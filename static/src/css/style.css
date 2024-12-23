@@ -128,6 +128,12 @@ btn-outline-primary .btn-informe-publicador:active :hover {
   .kanban-aprobada.rounded-lg {
     border:1px solid #9ace8d;
     opacity: 1;
+    background-color:#e9ffea;
+  }
+
+  .kanban-irregular.rounded-lg {
+    border:1px solid #ce8dab;
+    opacity: 1;
     background-color:#edffe9;
   }
 .kanban-aprobada h3.text-center.text-cool::before {
@@ -141,9 +147,18 @@ btn-outline-primary .btn-informe-publicador:active :hover {
 
 
 .kanban-solicitud.rounded-lg{
-    border:2px solid #F5F5F5;
+    border:1px solid #ccc;
+    background-color: #F7F7F7;
     opacity: 1;
     padding-top: 15px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+  }
+
+  .kanban-solicitud.rounded-lg:hover{
+    border:1px solid #bdc1d1;
+    background-color: #FFFFFF;
+    transform: scale(1.05);  
   }
 
 .kanban-solicitud h3{

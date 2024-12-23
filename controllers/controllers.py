@@ -95,10 +95,10 @@ class Panel(http.Controller):
         if tipo == 'P':
             if check == '1':
                 resultado = 0
-                anotacion = 'SI: Ha participado'
+                anotacion = notas#'SI: Ha participado'
             else:
                 resultado = 0
-                anotacion = 'NO: Es IRREGULAR'
+                anotacion = notas#'NO: Es IRREGULAR'
                 ha_predicado = False
         
 

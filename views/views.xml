@@ -46,10 +46,11 @@
             </group>
             <notebook>
               <page string="INFORMES">
-                <field name="informe_id" widget="one2may_list">
+                <field name="informe_id" widget="one2may_list" orderby="fecha desc">
                   <tree>
                     <field name="fecha"/>
                     <field name="horas"/>
+                    <field name="notas"/>
                     <field name="cursos"/>
                     <field name="ha_predicado"/>
                   </tree>
@@ -144,7 +145,6 @@
         <search string="Filtrar publicadores">
           <field name="tipo" />
           <field name="grupo"/>
-
           <group expand="1" string="Agrupar por...">
             <filter name="groupby_tipo" string="Tipo de publicador" domain="[]" context="{'group_by': 'tipo'}" />
             <filter name="groupby_grupo" string="Grupos de servicio" domain="[]" context="{'group_by': 'grupo'}" />            
@@ -158,7 +158,8 @@
       <field name="name">Publicadores</field>
       <field name="res_model">secretary.publicadores</field>
       <field name="view_mode">kanban,tree,form</field> 
-      <field name="context">{"group_by": "grupo"}</field>
+      <field name="context">{"search_default_groupby_grupo":1}</field>
+      <!--field name="context">{"group_by": "grupo"}</field-->
       <field name="help" type="html">
         <p class="oe_view_nocontent_create">
           Publicadores        
@@ -443,63 +444,45 @@
           <field name="nombre"/>
           <field name="año"/>
           <field name="horas"/>
-          <field name="publicaciones"/>
+          <field name="notas"/>
           <field name="revisitas"/>
           <field name="videos"/>
           <field name="ha_predicado"/>
           <field name="cursos"/>
           <templates>
             <t t-name="kanban-box" >
-                <div  t-attf-class="oe_kanban_global_click rounded-lg kanban-publicadores" t-if="record.ha_predicado.raw_value">
+                <div t-attf-class="oe_kanban_global_click kanban-solicitud rounded-lg" t-if="record.ha_predicado.raw_value">
 
                   <div class="oe_kanban_details">
-                    <h3 class="text-cool">
+                    <h6 class="text-cool">
                       <field name="nombre" />
-                    </h3>                                
+                    </h6>                                
                     <div class="o_kanban_inline_block" t-if="record.horas.value">
                       <i id='icon-horas' class="fa fa-tachometer" role="img" aria-label="Horas del informe" />
                       <strong>
                         <field name="horas" widget="statinfo"
                         string="Horas"
-                        icon="fa-calendar"
+                        icon="fa-clock"
                         options="{'label_field': 'label_tasks'}" /> 
                       </strong>
                     </div>
-                    <div style="margin-left: 20px" class="o_kanban_inline_block" t-if="record.publicaciones.value">
-                      <i id='icon-publicaciones' class="fa fa-files-o" role="img" aria-label="Horas del informe" />
-                      <strong>
-                        <field name="publicaciones" widget="statinfo"
-                        string="Publicaciones"
-                        icon="fa-files-o"
-                        help="Publicaciones"
-                        options="{'label_field': 'label_tasks'}" /> 
-                      </strong>
-                    </div>
-                    <div class="o_kanban_inline_block" t-if="record.revisitas.value">
-                      <i id='icon-revisitas' class="fa fa-repeat" role="img" aria-label="Revisitas del informe" />
-                      <strong>
-                        <field name="revisitas" widget="statinfo"
-                        string="Revisitas"
-                        icon="fa-calendar"
-                        options="{'label_field': 'label_tasks'}" /> 
-                      </strong>
-                    </div>
-                    <div style="margin-left: 20px" class="o_kanban_inline_block" t-if="record.videos.value">
-                      <i id='icon-videos' class="fa fa-youtube-play" role="img" aria-label="Videos del informe" />
-                      <strong>
-                        <field name="videos" widget="statinfo"
-                        string="Videos"
-                        icon="fa-calendar"
-                        options="{'label_field': 'label_tasks'}" /> 
-                      </strong>
-                    </div>
-                    <div t-if="record.cursos.value">
+                    <div class="o_kanban_inline_block" t-if="record.cursos.value">
                       <i id='icon-cursos' class="fa fa-suitcase" role="img" aria-label="Cursos del informe" />
                       <strong>
                         <field name="cursos" widget="statinfo"
                         string="Cursos"
-                        icon="fa-calendar"
+                        icon="fa-graduation-cap"
                         options="{'label_field': 'label_tasks'}" /> 
+                      </strong>
+                    </div>
+                    <div t-if="record.notas.value">
+                      <i id='icon-notas' class="fa fa-pencil" role="img" aria-label="Notas del informe" />
+                      <strong>
+                        <field name="notas" 
+                        string=""
+                        icon="fa-pencil"
+                        options="{'label_tasks': 'label_field'}" 
+                        /> 
                       </strong>
                     </div>
                     
@@ -509,55 +492,37 @@
                 <div  t-attf-class="oe_kanban_global_click rounded-lg kanban-irregular" t-if="!record.ha_predicado.raw_value">
 
                   <div class="oe_kanban_details">
-                    <h3 class="text-cool">
+                    <h6 class="text-cool">
                       <field name="nombre" />
-                    </h3>                                
+                    </h6>                                
                     <div class="o_kanban_inline_block" t-if="record.horas.value">
                       <i id='icon-horas' class="fa fa-tachometer" role="img" aria-label="Horas del informe" />
                       <strong>
                         <field name="horas" widget="statinfo"
                         string="Horas"
-                        icon="fa-calendar"
+                        icon="fa-clock"
                         options="{'label_field': 'label_tasks'}" /> 
                       </strong>
                     </div>
-                    <div style="margin-left: 20px" class="o_kanban_inline_block" t-if="record.publicaciones.value">
-                      <i id='icon-publicaciones' class="fa fa-files-o" role="img" aria-label="Horas del informe" />
-                      <strong>
-                        <field name="publicaciones" widget="statinfo"
-                        string="Publicaciones"
-                        icon="fa-files-o"
-                        help="Publicaciones"
-                        options="{'label_field': 'label_tasks'}" /> 
-                      </strong>
-                    </div>
-                    <div class="o_kanban_inline_block" t-if="record.revisitas.value">
-                      <i id='icon-revisitas' class="fa fa-repeat" role="img" aria-label="Revisitas del informe" />
-                      <strong>
-                        <field name="revisitas" widget="statinfo"
-                        string="Revisitas"
-                        icon="fa-calendar"
-                        options="{'label_field': 'label_tasks'}" /> 
-                      </strong>
-                    </div>
-                    <div style="margin-left: 20px" class="o_kanban_inline_block" t-if="record.videos.value">
-                      <i id='icon-videos' class="fa fa-youtube-play" role="img" aria-label="Videos del informe" />
-                      <strong>
-                        <field name="videos" widget="statinfo"
-                        string="Videos"
-                        icon="fa-calendar"
-                        options="{'label_field': 'label_tasks'}" /> 
-                      </strong>
-                    </div>
-                    <div t-if="record.cursos.value">
+                    <div class="o_kanban_inline_block" t-if="record.cursos.value">
                       <i id='icon-cursos' class="fa fa-suitcase" role="img" aria-label="Cursos del informe" />
                       <strong>
                         <field name="cursos" widget="statinfo"
                         string="Cursos"
-                        icon="fa-calendar"
+                        icon="fa-graduation-cap"
                         options="{'label_field': 'label_tasks'}" /> 
                       </strong>
                     </div>
+                    <div t-if="record.notas.value">
+                      <i id='icon-notas' class="fa fa-pencil" role="img" aria-label="Notas del informe" />
+                      <strong>
+                        <field name="notas" 
+                        string=""
+                        icon="fa-pencil"
+                        options="{'label_tasks': 'label_field'}" 
+                        /> 
+                      </strong>
+                    </div>  
                     
                   </div>
                   
