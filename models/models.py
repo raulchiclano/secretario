@@ -105,10 +105,23 @@ class grupos(models.Model):
 class solicitudesAux(models.Model):
     
     #Funciones
+    @api.model
+    def create(self, vals):
+    # Crear el registro
+        record = super(solicitudesAux, self).create(vals)
+    
+    # Enviar el correo
+        template = self.env.ref('secretary.email_template_solicitud_creada')
+        if template:
+            template.send_mail(record.id, force_send=True)
+    
+        return record
+
+
     @api.depends("mes")
     def _compute_date(self):
         for record in self:
-            record.fecha = "%s-%s" %(record.mes,record.año)
+            record.fecha = "%s-%s" %(record.mes,(datetime.strftime(datetime.today(),'%Y')))
 
 
     def calculoMesAInformar():
@@ -127,6 +140,11 @@ class solicitudesAux(models.Model):
     _order_by = "aprobada"
     id = fields.Integer(string= 'Nombre', default=lambda self: self.env['ir.sequence'].next_by_code('increment_your_field'))
     publicador = fields.Many2one("secretary.publicadores", string='Publicador')
+    tipo = fields.Selection(
+        selection=[('P', 'Publicador'), ('A', 'Auxiliar'), ('R', 'Regular')],
+        string='Tipo',
+        related='publicador.tipo'
+    )
     name = fields.Char( string='Solicitante')
     mes = fields.Selection([('1', 'Enero'), ('2', 'Febrero'), ('3', 'Marzo'), ('4', 'Abril'),('5', 'Mayo'), ('6', 'Junio'), ('7', 'Julio'), ('8', 'Agosto'),('9', 'Septiembre'), ('10', 'Octubre'), ('11', 'Noviembre'), ('12', 'Diciembre'), ], string='Mes', default=calculoMesAInformar())
     current_year = datetime.strftime(datetime.today(),'%Y')
@@ -139,6 +157,12 @@ class solicitudesAux(models.Model):
     aprobada = fields.Boolean(string = "Aprobada", readonly=True, compute='_compute_aprobada', store=True)
     
     #Funciones automaticas
+    @api.model
+    def get_mes_label(self):
+        """Devuelve la etiqueta legible del campo 'mes'."""
+        return dict(self._fields['mes'].selection).get(self.mes, '')
+    
+    
     @api.depends('firmaCord', 'firmaServ', 'firmaSecr')
     def _compute_aprobada(self):
         for record in self:
@@ -462,6 +486,11 @@ class TotalesMensuales(models.TransientModel):
          
     def get_publicadores(self):
         lista_porgrupos = self.env['secretary.publicadores'].search([('grupo','=',self.grupo_seleccionado),('activo','=','True'),])
+        print("Debug: lista_porgrupos_____________",lista_porgrupos, flush=True)
+        return lista_porgrupos
+    
+    def get_AllPublicadores(self):
+        lista_porgrupos = self.env['secretary.publicadores'].search([('grupo','=',self.grupo_seleccionado),])
         print("Debug: lista_porgrupos_____________",lista_porgrupos, flush=True)
         return lista_porgrupos
         

@@ -41,100 +41,102 @@
               <t t-call="web.basic_layout">
                 <!-- Año anterior -->
                 <div class="page" style="page-break-after:always">
-                  <table border="1" style="width:100%; line-height: 1.1;">
-                    <h6 style="margin-bottom: 0px; width:100%; font-family: serif" class="font-weight-bold text-center">
-                                        REGISTRO DE PUBLICADOR DE LA CONGREGACIÓN<!-- t-if="tipo['tipo_informe'] == 'P'"-->
-                    </h6>
-                    <tr style="margin-bottom: 0px">
-                      <td style="width:10%; font-size: 10px; vertical-align: bottom" class="font-weight-bold">
-                        <strong>Nombre: </strong>
-                      </td>
-                      <td colspan="5" class="text-center" style="border-bottom: 1px dotted;">
-                        <span style="font-size: 10px;" t-esc="tipo[1]" />
-                      </td>
-                    </tr>
-                    <tr style="width:100%; margin-bottom: 0px">
-                      <td style="font-size: 10px; vertical-align: bottom;" class="font-weight-bold">
-                        <strong>Fecha de nacimiento: </strong>
-                      </td>
-                      <td colspan="2" class="text-center" style="font-size: 10px; border-bottom: 1px dotted; vertical-align: bottom;">
-                        <span/>
-                      </td>
-                      <td class="text-left font-weight-bold" style="font-size: 10px;">
-                        <input type="checkbox" id="H">
-                          <label for="H"> Hombre</label>
-                        </input>
-                      </td>
-                      <td class="text-left font-weight-bold" style="font-size: 10px;">
-                        <input type="checkbox" id="M">
-                          <label for="M"> Mujer</label>
-                        </input>
-                        
-                      </td>
-                    </tr>
-    
+                <table border="1" style="width:100%; line-height: 1.1;">
+                <div class="page">
+                  <h6 style="margin-bottom: 0px; width:100%; font-family: serif" class="font-weight-bold text-center">
+                        REGISTRO DE PUBLICADOR DE LA CONGREGACIÓN
+                      </h6>
+
+                  <tr style="margin-bottom: 0px">
+                    <td style="width:10%; font-size: 10px; vertical-align: bottom" class="font-weight-bold">
+                      <strong>Nombre: </strong>
+                    </td>
+                    <td colspan="5" class="text-center" style="border-bottom: 1px dotted;">
+                      <span style="font-size: 10px;"  t-esc="tipo[1]" />
+                    </td>
+                  </tr>
+
+                  <tr style="width:100%; margin-bottom: 0px">
+                    <td style="font-size: 10px; vertical-align: bottom;" class="font-weight-bold">
+                      <strong>Fecha de nacimiento: </strong>
+                    </td>
+                    <td colspan="2" class="text-center" style="font-size: 10px; border-bottom: 1px dotted; vertical-align: bottom;">
+                      <span/>
+                    </td>
+                    <td class="text-left font-weight-bold" style="font-size: 10px;">
+                      <input  type="checkbox" id="H">
+                        <label for="H"> Hombre</label>
+                      </input>
+                    </td>
+                    <td class="text-left font-weight-bold" style="font-size: 10px;">
+                      <input type="checkbox" id="M">
+                        <label for="M"> Mujer</label>
+                      </input>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td style="margin-bottom: 0px; width:17%; font-size: 10px; vertical-align: bottom;" class="font-weight-bold">
+                      <strong>Fecha de bautismo: </strong>
+                    </td>
+                    <td colspan="2" class="text-center" style="font-size: 10px; border-bottom: 1px dotted; vertical-align: bottom;">
+                      <span/>
+                    </td>
+                    <td class="text-left font-weight-bold" style="width:15%; font-size: 10px;">
+                      <input type="checkbox" checked="True" id="O">
+                        <label for="O">Otras Ovejas  </label>
+                      </input>
+                    </td>
+                    <td class="text-left font-weight-bold" style="width:15%; font-size: 10px;">
+                      <input type="checkbox" id="U">
+                        <label for="U"> Ungido</label>
+                      </input>
+                      <br></br>
+                    </td>
                     <tr>
-                      <td style="margin-bottom: 0px; width:17%; font-size: 10px; vertical-align: bottom;" class="font-weight-bold">
-                        <strong>Fecha de bautismo: </strong>
-                      </td>
-                      <td colspan="2" class="text-center" style="font-size: 10px; border-bottom: 1px dotted; vertical-align: bottom;">
-                        <span/>
-                      </td>
-                      <td class="text-left font-weight-bold" style="width:15%; font-size: 10px;">
-                        <input type="checkbox" id="O">
-                          <label for="O">Otras Ovejas  </label>
+                      
+                      <td class="text-left font-weight-bold" style="padding: .5em .75em 1em 0; font-size: 10px;">
+                        <input type="checkbox" id="A">
+                          <label for="A"> Anciano</label>
                         </input>
                       </td>
-                      <td class="text-left font-weight-bold" style="width:15%; font-size: 10px;">
-                        <input type="checkbox" id="U">
-                          <label for="U"> Ungido</label>
+                      <td class="text-left font-weight-bold" style="font-size: 10px;">
+                        <input  type="checkbox" id="S">
+                          <label for="S"> S. Ministerial</label>
                         </input>
-                        <br></br>
                       </td>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td class="text-right font-weight-bold" style="padding: 0em .75em; font-size: 10px;">
-                          <input type="checkbox" id="A">
-                            <label for="A"> Anciano</label>
+                      <td class="text-left font-weight-bold" style="font-size: 10px;">
+                        <input t-if="tipo[0] != 'R'" type="checkbox" id="H">
+                            <label for="H"> Precursor regular</label>
                           </input>
-                        </td>
-                        <td class="text-left font-weight-bold" style="font-size: 10px;">
-                          <input type="checkbox" id="S">
-                            <label for="S"> S. Ministerial</label>
+                          <input t-if="tipo[0] == 'R'" type="checkbox" checked="True" id="H">
+                            <label for="H"> Precursor regular</label>
                           </input>
-                        </td>
-                        <td class="text-left font-weight-bold" style="font-size: 10px;">
-                          <input t-if="tipo != 'Regulares'" type="checkbox" id="H">
-                            <label for="H"> P. regular</label>
-                          </input>
-                          <input t-if="tipo == 'Regulares'" type="checkbox" checked="True" id="H">
-                            <label for="H"> P. regular</label>
-                          </input>
-                        </td>
-                      </tr>
-    
+                      </td>
+                      <td></td>
+                      <td></td>
                     </tr>
-                    <table class="text-center" style="width:100%; margin-top: 0px; font-size: 11px;">
-                      <colgroup span="1" style="width:10%; font-size:10px;" />
-                      <thead>
-                        <t t-set="year" t-value="docs.current_year()"/>
-                        <t t-set="last_year" t-value="str(int(docs.current_year())-1)"/>
-                        <t t-log="year"/>
-                        <tr>
-    
-                          <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Año: <span t-out="last_year"/>/<span t-out="year"/></th>
-                          <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Publicaciones</th>
-                          <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Videos</th>
-                          <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Horas</th>
-                          <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Revisitas</th>
-                          <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Cursos bíblicos</th>
-                          <th style="border-top: 2px solid #000; width:30%" scope="col" colspan="2">Notas</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-              
-                          <t t-set="contPub" t-value="0"/>
+
+                  </tr>
+
+                  <table class="text-center" style="width:100%; margin-top: 0px; font-size: 11px;">
+                    <colgroup span="1" style="width:10%; font-size:10px;" />
+                    <thead>
+                      <t t-set="year" t-value="docs.current_year()"/>
+                      <t t-set="actual_year" t-value="str(int(docs.current_year())-1)"/>
+                      <t t-log="year"/>
+                      <tr>
+                        <!--Las Cabeceras de nuestra tabla-->
+                        <th style="border-top: 2px solid #000; border-right: 1px solid #000; border-left: 2px solid #000;" scope="col">Año: <span t-out="actual_year"/>/<span t-out="year"/></th>
+                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Participación en el ministerio</th>
+                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Cursos bíblicos</th>
+                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Precursor auxiliar</th>
+                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Horas (Si es precursor)</th>
+                        <th style="border-top: 2px solid #000; border-right: 2px solid #000; width:30%" scope="col" colspan="2">Notas (Medias)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <t t-set="contPub" t-value="0"/>
                           <t t-set= "totPub" t-value="0"/>
                           <t t-set="contVid" t-value="0"/>
                           <t t-set= "totVid" t-value="0"/>
@@ -143,100 +145,78 @@
                           <t t-set="contRev" t-value="0"/>
                           <t t-set= "totRev" t-value="0"/>
                           <t t-set="contCur" t-value="0"/>
-                          <t t-set= "totCur" t-value="0"/>
-                          <tr t-foreach='[("Septiembre","9",last_year),("Octubre","10",last_year),("Noviembre","11",last_year),("Diciembre","12",last_year),("Enero","1",year),("Febrero","2",year),("Marzo","3",year),("Abril","4",year),("Mayo","5",year),("Junio","6",year),("Julio","7",year),("Agosto","8",year),]' t-as="fila">
-                          
-                          <t t-set="totales_por_meses" t-value="docs.get_informes_por_tipo(fila[1],fila[2])" />
-                          <th  scope="row" class="text-center" style="height: 18px; border: 1px solid black;  border-collapse: ollapse; border-left: 0px;">
+                          <t t-set= "totCur" t-value="0"/>   
+                      <tr t-foreach='[("Septiembre","9",actual_year),("Octubre","10",actual_year),("Noviembre","11",actual_year),("Diciembre","12",actual_year),("Enero","1",year),("Febrero","2",year),("Marzo","3",year),("Abril","4",year),("Mayo","5",year),("Junio","6",year),("Julio","7",year),("Agosto","8",year),]' t-as="fila">
+                        
+                        <t t-set="totales_por_meses" t-value="docs.get_informes_por_tipo(fila[1],fila[2])" />
+                        
+                        <th  scope="row" class="text-center" style="height: 18px; border: 1px solid black;  border-collapse: collapse; border-left: 2px solid #000;">
                           <span t-out="fila[0]"/>
-                          </th>
-                            <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
-                              <t t-foreach="totales_por_meses" t-as="tipo_informe">
-                                <t t-if= "tipo_informe['tipo_informe'] == tipo[0]">
-                                  
-
-                                  <t t-set="totales_por_meses" t-value="docs.get_informes_por_tipo(fila[1],fila[2])" />                                
-                                  <span t-esc="tipo_informe['publicaciones']" />
-                                  <t t-set= "totPub" t-value="totPub + tipo_informe['publicaciones']"/>
-                                  <t t-set="contPub" t-value="contPub + 1"/>
-                                  
-                                </t>
-                              </t>
-                            </td>
-                            <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
-                              <t t-foreach="totales_por_meses" t-as="tipo_informe">
-                                <t t-if= "tipo_informe['tipo_informe'] == tipo[0]">
-                                  <span t-esc="tipo_informe['videos']" />
-                                  <t t-set= "totVid" t-value="totVid + tipo_informe['videos']"/>
-                                  <t t-set="contVid" t-value="contVid + 1"/>
-                                </t>
-                              </t>
-                            </td>
-                            <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
-                              <t t-foreach="totales_por_meses" t-as="tipo_informe">
-                                <t t-if= "tipo_informe['tipo_informe'] == tipo[0]">
-                                  <span t-esc="tipo_informe['horas']" />
-                                  <t t-set= "totHor" t-value="totHor + tipo_informe['horas']"/>
-                                  <t t-set="contHor" t-value="contHor + 1"/>
-                                </t>
-                              </t>
-                            </td>
-                            <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
-                              <t t-foreach="totales_por_meses" t-as="tipo_informe">
-                                <t t-if= "tipo_informe['tipo_informe'] == tipo[0]">
-                                  <span t-esc="tipo_informe['revisitas']" />
-                                  <t t-set= "totRev" t-value="totRev + tipo_informe['revisitas']"/>
-                                  <t t-set="contRev" t-value="contRev + 1"/>
-                                </t>
-                              </t>
-                            </td>
-                            <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
-                              <t t-foreach="totales_por_meses" t-as="tipo_informe">
-                                <t t-if= "tipo_informe['tipo_informe'] == tipo[0]">
+                        </th>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
+                          <t t-foreach="totales_por_meses" t-as="informe">
+                            <t t-if= "informe['tipo_informe'] == tipo[0]">
+                              <input type="checkbox" checked="True"></input>
+                            </t>
+                          </t>
+                        </td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
+                          <t t-foreach="totales_por_meses" t-as="tipo_informe">
+                            <t t-if= "tipo_informe['tipo_informe'] == tipo[0]">
                                   <span t-esc="tipo_informe['cursos']" />
                                   <t t-set= "totCur" t-value="totCur + tipo_informe['cursos']"/>
                                   <t t-set="contCur" t-value="contCur + 1"/>
+                          </t>
+                          </t>
+                        </td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
+                          <t t-foreach="totales_por_meses" t-as="tipo_informe">
+                            <t t-if= "tipo_informe['tipo_informe'] == tipo[0]">
+                              <input t-if= "tipo[0] == 'A'" type="checkbox" checked="True"></input>
+                              <input t-if= "tipo[0] != 'A'" type="checkbox"></input>
+                            </t>
+                          </t>
+                        </td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
+                          <t t-foreach="totales_por_meses" t-as="tipo_informe">
+                                <t t-if= "tipo_informe['tipo_informe'] == tipo[0]">
+                                  <t t-if="tipo[0] != 'P'">
+                                    <span t-esc="tipo_informe['horas']" />
+                                    <t t-set= "totHor" t-value="totHor + tipo_informe['horas']"/>
+                                    <t t-set="contHor" t-value="contHor + 1"/>
+                                  </t>
                                 </t>
                               </t>
-                            </td>
-                            <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;border-right: 0px;">
-                              <t t-foreach="totales_por_meses" t-as="tipo_informe">
-                                <t t-if= "tipo_informe['tipo_informe'] == tipo[0]">Nº de informes: <span t-esc="tipo_informe['tipo_informe_count']" ></span></t>
-
-                              </t>
-                            </td>
+                        </td>
+                        
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px; border-right: 2px solid #000;">
+                         <t t-foreach="totales_por_meses" t-as="tipo_informe">
+                                <t t-if= "tipo_informe['tipo_informe'] == tipo[0]"><span t-esc="tipo_informe['tipo_informe_count']" ></span> publicadores:
+                                  <t t-if="tipo[0] != 'P'"> (Hor: <t t-esc="round(tipo_informe['horas']/tipo_informe['tipo_informe_count'])"/> 
+                                  Cur: <t t-esc="round(tipo_informe['cursos']/tipo_informe['tipo_informe_count'], 1)"/>)</t>
+                                
+                                </t>
+                          </t>
+                        </td>
+                      </tr>
+                      <!--FILA TOTALES-->
+                      <tr>
+                      <th  scope="row" style="height: 18px; border: 0px solid black;  border-collapse: ollapse; border-left: 0px;">
                           
-                          </tr>
-                          <!--FILA TOTALES TODO:No funciona-->
-                      <tr>
-                      <th  scope="row" style="height: 18px; border: 1px solid black;  border-collapse: ollapse; border-left: 0px;">
-                          Totales:
                         </th>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="totPub"/></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="totVid"/></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="totHor"/></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="totRev"/></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="totCur"/></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;border-right: 0px;"></td>
+                        <td style="border: 0px solid black;  border-collapse: collapse; border-left: 0px;"></td>
+                        <td style="border: 0px solid black;  border-collapse: collapse; border-left: 0px;"></td>
+                        <td style="border: 0px solid black;  border-collapse: collapse; border-right: 1px;"><strong>Total</strong></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse;"><t t-esc="totHor"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;border-right: 2px solid #000;"><t t-if="tipo[0] == 'R'">Media mensual: <t t-esc="round((round(totHor/contHor, 1))/tipo_informe['tipo_informe_count'])"/></t></td>
                         
                       </tr>
-                      <!--FILA PROMEDIOS-->
-                      <tr>
-                      <th  scope="row" style="height: 18px; border: 1px solid black;  border-collapse: ollapse; border-left: 0px">
-                          Promedio:
-                        </th>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="round(totPub/contPub, 1)"/></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="round(totVid/contVid, 1)"/></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="round(totHor/contHor, 1)"/></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="round(totRev/contRev, 1)"/></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="round(totCur/contCur, 1)"/></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;border-right: 0px;"></td>
-                        
-                      </tr>
-
-                      </tbody>
-                      </table>
-                    </table>
+                      
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </table>  
                 </div>
 
 
@@ -820,7 +800,7 @@
               <table border="1" style="width:100%; line-height: 1.1;">
                 <div class="page">
                   <h6 style="margin-bottom: 0px; width:100%; font-family: serif" class="font-weight-bold text-center">
-                        REGISTRO DE PUBLICADOR DE LA CONGREGACIÓN
+                        REGISTRO DE PUBLICADOR DE LA CONGREGACIÓN 
                       </h6>
 
                   <tr style="margin-bottom: 0px">
@@ -865,7 +845,7 @@
                       <span t-field="publicador.fecha_bautismo" />
                     </td>
                     <td class="text-left font-weight-bold" style="width:15%; font-size: 10px;">
-                      <input type="checkbox" id="O">
+                      <input type="checkbox" checked="True" id="O">
                         <label for="O">Otras Ovejas  </label>
                       </input>
                     </td>
@@ -876,9 +856,8 @@
                       <br></br>
                     </td>
                     <tr>
-                      <td></td>
-                      <td></td>
-                      <td class="text-right font-weight-bold" style="padding: 0em .75em; font-size: 10px;">
+                      
+                      <td class="text-left font-weight-bold" style="padding: .5em .75em 1em 0; font-size: 10px;">
                         <input t-if="publicador.nombramiento != 'A'" type="checkbox" id="A">
                           <label for="A"> Anciano</label>
                         </input>
@@ -896,12 +875,14 @@
                       </td>
                       <td class="text-left font-weight-bold" style="font-size: 10px;">
                         <input t-if="publicador.tipo != 'R'" type="checkbox" id="H">
-                          <label for="H"> P. Regular</label>
+                          <label for="H"> Precursor regular</label>
                         </input>
                         <input t-if="publicador.tipo == 'R'" type="checkbox" checked="True" id="H">
-                          <label for="H"> P. Regular</label>
+                          <label for="H"> Precursor regular</label>
                         </input>
                       </td>
+                      <td></td>
+                      <td></td>
                     </tr>
 
                   </tr>
@@ -910,68 +891,31 @@
                     <colgroup span="1" style="width:10%; font-size:10px;" />
                     <thead>
                       <t t-set="year" t-value="docs.current_year()"/>
-                      <t t-set="last_year" t-value="str(int(docs.current_year())-1)"/>
+                      <t t-set="actual_year" t-value="str(int(docs.current_year())-1)"/>
                       <t t-log="year"/>
                       <tr>
                         <!--Las Cabeceras de nuestra tabla-->
-                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Año: <span t-out="last_year"/>/<span t-out="year"/></th>
-                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Publicaciones</th>
-                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Videos</th>
-                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Horas</th>
-                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Revisitas</th>
+                        <th style="border-top: 2px solid #000; border-right: 1px solid #000; border-left: 2px solid #000;" scope="col">Año: <span t-out="actual_year"/>/<span t-out="year"/></th>
+                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Participación en el ministerio</th>
                         <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Cursos bíblicos</th>
-                        <th style="border-top: 2px solid #000; width:30%" scope="col" colspan="2">Notas</th>
+                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Precursor auxiliar</th>
+                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Horas (Si es precursor)</th>
+                        <th style="border-top: 2px solid #000; border-right: 2px solid #000; width:30%" scope="col" colspan="2">Notas</th>
                       </tr>
                     </thead>
                     <tbody>
                       <t t-set="informes" t-value="publicador.mapped('informe_id')" />
-                      <t t-set="contPub" t-value="0"/>
-                          <t t-set= "totPub" t-value="0"/>
-                          <t t-set="contVid" t-value="0"/>
-                          <t t-set= "totVid" t-value="0"/>
-                          <t t-set="contHor" t-value="0"/>
-                          <t t-set= "totHor" t-value="0"/>
-                          <t t-set="contRev" t-value="0"/>
-                          <t t-set= "totRev" t-value="0"/>
-                          <t t-set="contCur" t-value="0"/>
-                          <t t-set= "totCur" t-value="0"/>
-                      <tr t-foreach='[("Septiembre","9",last_year),("Octubre","10",last_year),("Noviembre","11",last_year),("Diciembre","12",last_year),("Enero","1",year),("Febrero","2",year),("Marzo","3",year),("Abril","4",year),("Mayo","5",year),("Junio","6",year),("Julio","7",year),("Agosto","8",year),]' t-as="fila">
-                        <th  scope="row" class="text-center" style="height: 18px; border: 1px solid black;  border-collapse: ollapse; border-left: 0px;">
+                      <t t-set="contHor" t-value="0"/>
+                      <t t-set= "totHor" t-value="0"/>    
+                      <tr t-foreach='[("Septiembre","9",actual_year),("Octubre","10",actual_year),("Noviembre","11",actual_year),("Diciembre","12",actual_year),("Enero","1",year),("Febrero","2",year),("Marzo","3",year),("Abril","4",year),("Mayo","5",year),("Junio","6",year),("Julio","7",year),("Agosto","8",year),]' t-as="fila">
+                        <th  scope="row" class="text-center" style="height: 18px; border: 1px solid black;  border-collapse: collapse; border-left: 2px solid #000;">
                           <span t-out="fila[0]"/>
                         </th>
                         <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
                           <t t-foreach="informes" t-as="informe">
                             <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
-                              <span t-field="informe.publicaciones" />
-                              <t t-set= "totPub" t-value="totPub + informe.publicaciones"/>
-                                  <t t-set="contPub" t-value="contPub + 1"/>
-                            </t>
-                          </t>
-                        </td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
-                          <t t-foreach="informes" t-as="informe">
-                            <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
-                              <span t-field="informe.videos" />
-                              <t t-set= "totVid" t-value="totVid + informe.videos"/>
-                              <t t-set="contVid" t-value="contVid + 1"/>
-                            </t>
-                          </t>
-                        </td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
-                          <t t-foreach="informes" t-as="informe">
-                            <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
-                              <span t-field="informe.horas" />
-                              <t t-set= "totHor" t-value="totHor + informe.horas"/>
-                                  <t t-set="contHor" t-value="contHor + 1"/>
-                            </t>
-                          </t>
-                        </td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
-                          <t t-foreach="informes" t-as="informe">
-                            <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
-                              <span t-field="informe.revisitas" />
-                              <t t-set= "totRev" t-value="totRev + informe.revisitas"/>
-                                  <t t-set="contRev" t-value="contRev + 1"/>
+                              <input t-if= "informe.ha_predicado == True" type="checkbox" checked="True"></input>
+                              <input t-if= "informe.ha_predicado != True" type="checkbox"></input>
                             </t>
                           </t>
                         </td>
@@ -979,45 +923,48 @@
                           <t t-foreach="informes" t-as="informe">
                             <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
                               <span t-field="informe.cursos" />
-                              <t t-set= "totCur" t-value="totCur + informe.cursos"/>
-                                  <t t-set="contCur" t-value="contCur + 1"/>
                             </t>
                           </t>
                         </td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;border-right: 0px;">
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
                           <t t-foreach="informes" t-as="informe">
                             <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
-                              <span t-field="informe.notas" />
+                              <input t-if= "informe.tipo_informe == 'A'" type="checkbox" checked="True"></input>
+                              <input t-if= "informe.tipo_informe != 'A'" type="checkbox"></input>
+                            </t>
+                          </t>
+                        </td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
+                          <t t-foreach="informes" t-as="informe">
+                            <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
+                              <t t-set= "totHor" t-value="totHor + informe.horas"/>
+                              <t t-set="contHor" t-value="contHor + 1"/>
+                            <t t-if= "informe.tipo_informe != 'P'"><span t-field="informe.horas" /></t>
+                            </t>
+                          </t>
+                        </td>
+                        
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px; border-right: 2px solid #000;">
+                          <t t-foreach="informes" t-as="informe">
+                            <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
+                            <t t-if= "informe.tipo_informe != 'P'"><span t-field="informe.notas" /></t>
                             </t>
                           </t>
                         </td>
                       </tr>
                       <!--FILA TOTALES-->
                       <tr>
-                      <th  scope="row" style="height: 18px; border: 1px solid black;  border-collapse: ollapse; border-left: 0px;">
-                          Totales:
+                      <th  scope="row" style="height: 18px; border: 0px solid black;  border-collapse: ollapse; border-left: 0px;">
+                          
                         </th>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="totPub"/></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="totVid"/></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="totHor"/></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="totRev"/></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="totCur"/></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;border-right: 0px;"></td>
+                        <td style="border: 0px solid black;  border-collapse: collapse; border-left: 0px;"></td>
+                        <td style="border: 0px solid black;  border-collapse: collapse; border-left: 0px;"></td>
+                        <td style="border: 0px solid black;  border-collapse: collapse; border-right: 1px;"><strong>Total</strong></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse;"><t t-esc="totHor"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;border-right: 2px solid #000;"></td>
                         
                       </tr>
-                      <!--FILA PROMEDIOS-->
-                      <tr>
-                      <th  scope="row" style="height: 18px; border: 1px solid black;  border-collapse: ollapse; border-left: 0px">
-                          Promedio:
-                        </th>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-if="totPub>0"><t t-esc="round(totPub/contPub, 1)"/></t></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-if="totVid>0"><t t-esc="round(totVid/contVid, 1)"/></t></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-if="totHor>0"><t t-esc="round(totHor/contHor, 1)"/></t></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-if="totRev>0"><t t-esc="round(totRev/contRev, 1)"/></t></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-if="totCur>0"><t t-esc="round(totCur/contCur, 1)"/></t></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;border-right: 0px;"></td>
-                        
-                      </tr>
+                      
                       
                     </tbody>
                   </table>
@@ -1219,7 +1166,7 @@
               <table border="1" style="width:100%; line-height: 1.1;">
                 <div class="page">
                   <h6 style="margin-bottom: 0px; width:100%; font-family: serif" class="font-weight-bold text-center">
-                        REGISTRO DE PUBLICADOR DE LA CONGREGACIÓN
+                        REGISTRO DE PUBLICADOR DE LA CONGREGACIÓN 
                       </h6>
 
                   <tr style="margin-bottom: 0px">
@@ -1264,7 +1211,7 @@
                       <span t-field="publicador.fecha_bautismo" />
                     </td>
                     <td class="text-left font-weight-bold" style="width:15%; font-size: 10px;">
-                      <input type="checkbox" id="O">
+                      <input type="checkbox" checked="True" id="O">
                         <label for="O">Otras Ovejas  </label>
                       </input>
                     </td>
@@ -1275,26 +1222,33 @@
                       <br></br>
                     </td>
                     <tr>
-                      <td></td>
-                      <td></td>
-                      <td class="text-right font-weight-bold" style="padding: 0em .75em; font-size: 10px;">
-                        <input type="checkbox" id="A">
+                      
+                      <td class="text-left font-weight-bold" style="padding: .5em .75em 1em 0; font-size: 10px;">
+                        <input t-if="publicador.nombramiento != 'A'" type="checkbox" id="A">
+                          <label for="A"> Anciano</label>
+                        </input>
+                        <input t-if="publicador.nombramiento == 'A'" type="checkbox" checked="True" id="A">
                           <label for="A"> Anciano</label>
                         </input>
                       </td>
                       <td class="text-left font-weight-bold" style="font-size: 10px;">
-                        <input type="checkbox" id="S">
+                        <input t-if="publicador.nombramiento != 'S'" type="checkbox" id="S">
+                          <label for="S"> S. Ministerial</label>
+                        </input>
+                        <input t-if="publicador.nombramiento == 'S'" type="checkbox" checked="True" id="S">
                           <label for="S"> S. Ministerial</label>
                         </input>
                       </td>
                       <td class="text-left font-weight-bold" style="font-size: 10px;">
                         <input t-if="publicador.tipo != 'R'" type="checkbox" id="H">
-                          <label for="H"> P. Regular</label>
+                          <label for="H"> Precursor regular</label>
                         </input>
                         <input t-if="publicador.tipo == 'R'" type="checkbox" checked="True" id="H">
-                          <label for="H"> P. Regular</label>
+                          <label for="H"> Precursor regular</label>
                         </input>
                       </td>
+                      <td></td>
+                      <td></td>
                     </tr>
 
                   </tr>
@@ -1303,68 +1257,31 @@
                     <colgroup span="1" style="width:10%; font-size:10px;" />
                     <thead>
                       <t t-set="year" t-value="docs.current_year()"/>
-                      <t t-set="last_year" t-value="str(int(docs.current_year())-1)"/>
+                      <t t-set="actual_year" t-value="str(int(docs.current_year())-1)"/>
                       <t t-log="year"/>
                       <tr>
                         <!--Las Cabeceras de nuestra tabla-->
-                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Año: <span t-out="last_year"/>/<span t-out="year"/></th>
-                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Publicaciones</th>
-                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Videos</th>
-                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Horas</th>
-                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Revisitas</th>
+                        <th style="border-top: 2px solid #000; border-right: 1px solid #000; border-left: 2px solid #000;" scope="col">Año: <span t-out="actual_year"/>/<span t-out="year"/></th>
+                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Participación en el ministerio</th>
                         <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Cursos bíblicos</th>
-                        <th style="border-top: 2px solid #000; width:30%" scope="col" colspan="2">Notas</th>
+                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Precursor auxiliar</th>
+                        <th style="border-top: 2px solid #000; border-right: 1px solid #000;" scope="col">Horas (Si es precursor)</th>
+                        <th style="border-top: 2px solid #000; border-right: 2px solid #000; width:30%" scope="col" colspan="2">Notas</th>
                       </tr>
                     </thead>
                     <tbody>
                       <t t-set="informes" t-value="publicador.mapped('informe_id')" />
-                      <t t-set="contPub" t-value="0"/>
-                          <t t-set= "totPub" t-value="0"/>
-                          <t t-set="contVid" t-value="0"/>
-                          <t t-set= "totVid" t-value="0"/>
-                          <t t-set="contHor" t-value="0"/>
-                          <t t-set= "totHor" t-value="0"/>
-                          <t t-set="contRev" t-value="0"/>
-                          <t t-set= "totRev" t-value="0"/>
-                          <t t-set="contCur" t-value="0"/>
-                          <t t-set= "totCur" t-value="0"/>
-                      <tr t-foreach='[("Septiembre","9",last_year),("Octubre","10",last_year),("Noviembre","11",last_year),("Diciembre","12",last_year),("Enero","1",year),("Febrero","2",year),("Marzo","3",year),("Abril","4",year),("Mayo","5",year),("Junio","6",year),("Julio","7",year),("Agosto","8",year),]' t-as="fila">
-                        <th  scope="row" class="text-center" style="height: 18px; border: 1px solid black;  border-collapse: ollapse; border-left: 0px;">
+                      <t t-set="contHor" t-value="0"/>
+                      <t t-set= "totHor" t-value="0"/>    
+                      <tr t-foreach='[("Septiembre","9",actual_year),("Octubre","10",actual_year),("Noviembre","11",actual_year),("Diciembre","12",actual_year),("Enero","1",year),("Febrero","2",year),("Marzo","3",year),("Abril","4",year),("Mayo","5",year),("Junio","6",year),("Julio","7",year),("Agosto","8",year),]' t-as="fila">
+                        <th  scope="row" class="text-center" style="height: 18px; border: 1px solid black;  border-collapse: collapse; border-left: 2px solid #000;">
                           <span t-out="fila[0]"/>
                         </th>
                         <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
                           <t t-foreach="informes" t-as="informe">
                             <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
-                              <span t-field="informe.publicaciones" />
-                              <t t-set= "totPub" t-value="totPub + informe.publicaciones"/>
-                                  <t t-set="contPub" t-value="contPub + 1"/>
-                            </t>
-                          </t>
-                        </td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
-                          <t t-foreach="informes" t-as="informe">
-                            <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
-                              <span t-field="informe.videos" />
-                              <t t-set= "totVid" t-value="totVid + informe.videos"/>
-                              <t t-set="contVid" t-value="contVid + 1"/>
-                            </t>
-                          </t>
-                        </td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
-                          <t t-foreach="informes" t-as="informe">
-                            <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
-                              <span t-field="informe.horas" />
-                              <t t-set= "totHor" t-value="totHor + informe.horas"/>
-                                  <t t-set="contHor" t-value="contHor + 1"/>
-                            </t>
-                          </t>
-                        </td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
-                          <t t-foreach="informes" t-as="informe">
-                            <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
-                              <span t-field="informe.revisitas" />
-                              <t t-set= "totRev" t-value="totRev + informe.revisitas"/>
-                                  <t t-set="contRev" t-value="contRev + 1"/>
+                              <input t-if= "informe.ha_predicado == True" type="checkbox" checked="True"></input>
+                              <input t-if= "informe.ha_predicado != True" type="checkbox"></input>
                             </t>
                           </t>
                         </td>
@@ -1372,45 +1289,48 @@
                           <t t-foreach="informes" t-as="informe">
                             <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
                               <span t-field="informe.cursos" />
-                              <t t-set= "totCur" t-value="totCur + informe.cursos"/>
-                                  <t t-set="contCur" t-value="contCur + 1"/>
                             </t>
                           </t>
                         </td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;border-right: 0px;">
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
                           <t t-foreach="informes" t-as="informe">
                             <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
-                              <span t-field="informe.notas" />
+                              <input t-if= "informe.tipo_informe == 'A'" type="checkbox" checked="True"></input>
+                              <input t-if= "informe.tipo_informe != 'A'" type="checkbox"></input>
+                            </t>
+                          </t>
+                        </td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;">
+                          <t t-foreach="informes" t-as="informe">
+                            <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
+                              <t t-set= "totHor" t-value="totHor + informe.horas"/>
+                              <t t-set="contHor" t-value="contHor + 1"/>
+                            <t t-if= "informe.tipo_informe != 'P'"><span t-field="informe.horas" /></t>
+                            </t>
+                          </t>
+                        </td>
+                        
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px; border-right: 2px solid #000;">
+                          <t t-foreach="informes" t-as="informe">
+                            <t t-if= "(informe.mes == fila[1]) and (informe.año == fila[2])">
+                            <t t-if= "informe.tipo_informe != 'P'"><span t-field="informe.notas" /></t>
                             </t>
                           </t>
                         </td>
                       </tr>
                       <!--FILA TOTALES-->
                       <tr>
-                      <th  scope="row" style="height: 18px; border: 1px solid black;  border-collapse: ollapse; border-left: 0px;">
-                          Totales:
+                      <th  scope="row" style="height: 18px; border: 0px solid black;  border-collapse: ollapse; border-left: 0px;">
+                          
                         </th>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="totPub"/></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="totVid"/></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="totHor"/></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="totRev"/></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-esc="totCur"/></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;border-right: 0px;"></td>
+                        <td style="border: 0px solid black;  border-collapse: collapse; border-left: 0px;"></td>
+                        <td style="border: 0px solid black;  border-collapse: collapse; border-left: 0px;"></td>
+                        <td style="border: 0px solid black;  border-collapse: collapse; border-right: 1px;"><strong>Total</strong></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse;"><t t-esc="totHor"/></td>
+                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;border-right: 2px solid #000;"></td>
                         
                       </tr>
-                      <!--FILA PROMEDIOS-->
-                      <tr>
-                      <th  scope="row" style="height: 18px; border: 1px solid black;  border-collapse: ollapse; border-left: 0px">
-                          Promedio:
-                        </th>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-if="totPub>0"><t t-esc="round(totPub/contPub, 1)"/></t></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-if="totVid>0"><t t-esc="round(totVid/contVid, 1)"/></t></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-if="totHor>0"><t t-esc="round(totHor/contHor, 1)"/></t></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-if="totRev>0"><t t-esc="round(totRev/contRev, 1)"/></t></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;"><t t-if="totCur>0"><t t-esc="round(totCur/contCur, 1)"/></t></td>
-                        <td style="border: 1px solid black;  border-collapse: collapse; border-left: 0px;border-right: 0px;"></td>
-                        
-                      </tr>
+                      
                       
                     </tbody>
                   </table>
@@ -1696,70 +1616,86 @@
     
       <t t-call="web.basic_layout">
         <t t-foreach="docs" t-as="o">
-        <t t-set="publicadores" t-value="docs.get_publicadores()" />
+        <t t-set="publicadores" t-value="docs.get_AllPublicadores()" />
               <div class="page" style="page-break-after:always; padding-left:50px; padding-right:50px">
-                <h5 class="text-center font-weight-bold">LISTADO DATOS DE CONTACTO EN CASO DE EMERGENCIA</h5>
-               
-                 <table style="width:100%" class="table table-hover ">
-                 <thead class="thead-dark ">
-                    <tr>
-                      <th scope="col">Nombre</th>
-                      <th scope="col">Teléfono</th>
-                      <th scope="col">T. Fijo</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Dirección</th>
-                      <th scope="col">Voluntades</th>
-                    </tr>
-                  </thead>  
-                  <t t-foreach="publicadores" t-as="publicador">
-                    <tbody>
-                      <tr class="thead-light"> 
-                        <th scope="row"><span style="padding-left:10px; width:50%; font-size: 18px;" t-field="publicador.name"/></th>
-                        <td><span style="padding-left:10px; width:50%; font-size: 14px;" t-field="publicador.telefono" /></td>
-                        <td><span style="padding-left:10px; width:50%; font-size: 14px;" t-field="publicador.telefono" /></td>
-                        <td><span style="padding-left:10px; width:50%; font-size: 14px;" t-field="publicador.email" /></td>
-                        <td><span style="padding-left:10px; width:50%; font-size: 14px;" t-field="publicador.direccion" /></td>
-                        <td><t t-if="publicador.voluntades == True"> SI</t><t t-else=""> NO</t></td>
-                      </tr>
-                      <thead>
-                        <tr>
-                          <th scope="col">EN SU CIUDAD</th>
-                          <th scope="col">Teléfono</th>
-                          <th scope="col">T. Fijo</th>
-                          <th scope="col">¿Es Testido?</th>
-                          <th scope="col">¿Dió consentimiento?</th>
-                          <th scope="col">Comentarios</th>
-                        </tr>
-                        <tr>
-                          <th scope="row"><span style="padding-left:10px; width:50%; font-size: 18px;"/></th>
-                          <td><span style="padding-left:10px; width:50%; font-size: 14px;" t-field="publicador.de_local_tf" /></td>
-                          <td><span style="padding-left:10px; width:50%; font-size: 14px;" t-field="publicador.de_local_tf_fijo" /></td>
-                          <td><t t-if="publicador.de_local_esTestigo == True"> SI</t><t t-else=""> NO</t></td>
-                          <td><t t-if="publicador.de_local_consentimiento == True"> SI</t><t t-else=""> NO</t></td>
-                          <td><span style="padding-left:10px; width:50%; font-size: 14px;" t-field="publicador.de_local_notas" /></td>
-                        </tr>
-                      </thead> 
-                      <thead>
-                        <tr>
-                          <th scope="col">EN OTRA CIUDAD</th>
-                          <th scope="col">Teléfono</th>
-                          <th scope="col">T. Fijo</th>
-                          <th scope="col">¿Es Testido?</th>
-                          <th scope="col">¿Dió consentimiento?</th>
-                          <th scope="col">Comentarios</th>
-                        </tr>
-                        <tr>
-                          <th scope="row"><span style="padding-left:10px; width:50%; font-size: 18px;"/></th>
-                          <td><span style="padding-left:10px; width:50%; font-size: 14px;" t-field="publicador.de_fuera_tf" /></td>
-                          <td><span style="padding-left:10px; width:50%; font-size: 14px;" t-field="publicador.de_fuera_tf_fijo" /></td>
-                          <td><t t-if="publicador.de_fuera_esTestigo == True"> SI</t><t t-else=""> NO</t></td>
-                          <td><t t-if="publicador.de_fuera_consentimiento == True"> SI</t><t t-else=""> NO</t></td>
-                          <td><span style="padding-left:10px; width:50%; font-size: 14px;" t-field="publicador.de_fuera_notas" /></td>
-                        </tr>
-                    </thead> 
-                    </tbody>
-                  </t>
-                 </table>  
+                <h5 class="text-center font-weight-bold" style="font-size: 18px;" >LISTADO DATOS DE CONTACTO EN CASO DE EMERGENCIA</h5>
+                <t t-foreach="publicadores" t-as="publicador">             
+                <table style="width:100%" class="table table-hover ">
+                  <style>
+                    table {
+                      border-collapse: collapse; /* Reduce el espacio entre bordes */
+                      margin-top:50px !important;
+                    }
+                    table:first-of-type {
+                      margin-top:0px !important;
+                    }
+                    th, td {
+                      padding: 5px; /* Reduce el padding vertical */
+                      line-height: 1; /* Reduce la altura de la línea */
+                    }
+                    .thead-dark th, .thead-light th {
+                      padding: 10px 5px; /* Padding específico para encabezados */
+                      font-size: 16px; /* Opcional: reduce el tamaño de texto */
+                      font-weight:700;
+                    }
+                    .thead-light{
+                      background-color:#F4F5F7 !important;
+                    }
+                    .thead-claro{
+                      background-color:#F4F5F7;
+                    }
+                  </style>
+                  <tr class="thead-dark ">
+                        <th colspan="2">Nombre</th>
+                        <th colspan="1" class="text-center">Teléfono</th>
+                        <th colspan="2" class="text-center">Email</th>
+                        <th colspan="3" class="text-center">Dirección</th>
+                        <th colspan="1" class="text-center">Voluntades</th>
+                  </tr>  
+                    
+                  <tbody>
+                          <tr class="thead-claro thead-destacado"> 
+                            <th colspan="2"><span style="padding-left:10px; width:50%; font-size: 16px;" t-field="publicador.name"/></th>
+                            <th colspan="1" class="text-center font-weight-bold"><span style="width:50%;" t-field="publicador.telefono"/></th>
+                            <th colspan="2" class="text-center font-weight-bold"><span style="width:50%; font-size: 14px;" t-field="publicador.email"/></th>
+                            <th colspan="3" class="text-center font-weight-bold"><span style="width:50%; font-size: 14px;" t-field="publicador.direccion"/></th>
+                            <th colspan="1" class="text-center font-weight-bold"><t t-if="publicador.voluntades == True"> SI</t><t t-else=""> NO</t></th>
+                          </tr>
+                          <tr class="thead-light">
+                            <th colspan="2">EN SU CIUDAD</th>
+                            <th scope="col">Teléfono</th>
+                            <th scope="col">T. Fijo</th>
+                            <th scope="col">¿Es Testido?</th>
+                            <th scope="col">¿Dió consentimiento?</th>
+                            <th colspan="3">Comentarios</th>
+                          </tr>
+                          <tr class="thead-claro">
+                            <th colspan="2"><span style="padding-left:10px; width:50%; font-size: 18px;"/></th>
+                            <td><span style="padding-left:10px; width:50%; font-size: 14px;" t-field="publicador.de_local_tf" /></td>
+                            <td><span style="padding-left:10px; width:50%; font-size: 14px;" t-field="publicador.de_local_tf_fijo" /></td>
+                            <td><t t-if="publicador.de_local_esTestigo == True"> SI</t><t t-else=""> NO</t></td>
+                            <td><t t-if="publicador.de_local_consentimiento == True"> SI</t><t t-else=""> NO</t></td>
+                            <td colspan="3"><span style="padding-left:10px; width:50%; font-size: 14px;" t-field="publicador.de_local_notas" /></td>
+                          </tr>
+                          <tr class="thead-light">
+                            <th colspan="2">EN OTRA CIUDAD</th>
+                            <th scope="col">Teléfono</th>
+                            <th scope="col">T. Fijo</th>
+                            <th scope="col">¿Es Testido?</th>
+                            <th scope="col">¿Dió consentimiento?</th>
+                            <th colspan="3">Comentarios</th>
+                          </tr>
+                          <tr class="thead-claro">
+                            <th colspan="2"><span style="padding-left:10px; width:50%; font-size: 18px;"/></th>
+                            <td><span style="padding-left:10px; width:50%; font-size: 14px;" t-field="publicador.de_fuera_tf" /></td>
+                            <td><span style="padding-left:10px; width:50%; font-size: 14px;" t-field="publicador.de_fuera_tf_fijo" /></td>
+                            <td><t t-if="publicador.de_fuera_esTestigo == True"> SI</t><t t-else=""> NO</t></td>
+                            <td><t t-if="publicador.de_fuera_consentimiento == True"> SI</t><t t-else=""> NO</t></td>
+                            <td colspan="3"><span style="padding-left:10px; width:50%; font-size: 14px;" t-field="publicador.de_fuera_notas" /></td>
+                          </tr>
+                  </tbody>
+                </table> 
+                </t>
               </div>
         </t>
       </t>

@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+        <record id="email_template_solicitud_creada" model="mail.template">
+            <field name="name">Notificación de Nueva Solicitud Prec. Auxiliar</field>
+            <field name="model_id" ref="model_secretary_solicitudesaux"/>
+            <field name="subject">Recibida nueva solicitud Precursorado auxiliar</field>
+            <field name="email_to">raulchiclano@gmail.com,andresmoncho@gmail.com,arturovilaplana@gmail.com</field>
+            <field name="body_html">
+                <![CDATA[
+                <p>Se ha recibido una nueva solicitud de precursorado auxiliar:</p>
+                <ul>
+                    <li><strong>Publicador:</strong> <t t-esc="object.name"/></li>
+                    <li><strong>Mes:</strong> <t t-esc="object.get_mes_label()"/></li>
+                    <t t-if="object.de_continiuo">
+                        <li><strong>Esta solicitud tiene marcada la casilla: 'Desea ser precursor auxiliar de continuo hasta nuevo aviso'</strong></li>
+                    </t>
+                </ul>
+                ]]>
+            </field>
+        </record>
+    </data>
+</odoo>

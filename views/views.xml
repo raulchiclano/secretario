@@ -246,6 +246,7 @@
             <sheet>
               <div>
                 <h2><field name="publicador" /></h2>
+                <h5><field name="tipo" /></h5>
               </div>
               <group name="group_top">
                 <group name="group_left" string="Firma">
@@ -347,7 +348,22 @@
       </field>
     </record>
 
+    <record id="secretary_solicitud_auxiliar_search" model="ir.ui.view">
+      <field name="name">secretary.solicitudesaux.view.search</field>
+      <field name="model">secretary.solicitudesaux</field>
 
+      <field name="arch" type="xml">
+        <search string="Filtrar solicitudes">
+          <field name="mes"/>
+          <field name="fecha"/>
+          <field name="aprobada"/>
+          <group expand="1" string="Agrupar por...">
+            <filter name="groupby_mes" string="Agrupados por meses" domain="[]" context="{'group_by': 'mes'}" />
+          </group>
+          <filter name="filterby_aprobada" string="Aprobadas" domain="[('aprobada', '=', 'true'),]"/>
+        </search>
+      </field>
+    </record>
 
 
 
